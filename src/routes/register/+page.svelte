@@ -55,6 +55,10 @@
 
 </style>
 
+<h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
+    <span class="gradient-heading">Register Your First Account!</span>
+</h1>
+
 
 <label>
     <div>
