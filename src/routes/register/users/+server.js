@@ -17,6 +17,7 @@ export async function POST(evt) {
         data.password_input,
         data.address_input,
         data.email_input,
-        data.ISO_birthdate);
+        data.ISO_birthdate
+    );
     return json({ok:true});
 }
