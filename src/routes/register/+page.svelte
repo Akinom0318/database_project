@@ -6,13 +6,62 @@
     let password_input = "";
     let address_input = "";
     let phone_number_input = "";
-    let birth_date_input = "";
+    let birthdate_input = "";
     let mask_password = false;
 
-
     let input_valid = false;
+    let warning_visible = false;
+    let register_success = false;
+
+
+    //action after pressed warning button
+    //will reset input and disable the warning
+    function pressed_warning_button(){
+        email_input = "";
+        account_input = "";
+        password_input = "";
+        address_input = "";
+        phone_number_input = "";
+        birthdate_input = "";
+        warning_visible = false;
+    }
+
+    //action after pressed success button
+    //will reset input and disable the warning
+    function pressed_register_success_button(){
+        email_input = "";
+        account_input = "";
+        password_input = "";
+        address_input = "";
+        phone_number_input = "";
+        birthdate_input = "";
+        register_success = false;
+    }
+
+    //return all users object
+    async function get_all_users(){
+        const response = await fetch("register/users");
+        let all_users_object = await response.json();
+        return all_users_object;
+    }
+
+    //to check the account existence
+    //if existence will return true
+    async function check_account_existence(){
+        let all_users_object = await get_all_users();
+        for(const user of all_users_object){
+            if(user.account == account_input){
+                warning_visible = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     //check whether the input is valid
-    function check_valid(){
+    //if valid then will register
+    async function check_valid(){
         if(!email_input){
             return;
         }
@@ -28,17 +77,26 @@
         if(!phone_number_input){
             return;
         }
-        if(!birth_date_input){
+        if(!birthdate_input){
             return;
         }
         input_valid = true;
         if(input_valid){
-            console.log(email_input);
-            console.log(account_input);
-            console.log(password_input);
-            console.log(address_input);
-            console.log(phone_number_input);
-            console.log(birth_date_input);
+            //check_result contain the result of check_account_existence
+            let check_result = await check_account_existence()
+            if(!check_result){
+                let date_birthdate = new Date(birthdate_input);
+                let ISO_birthdate = date_birthdate.toISOString();
+                const response = await fetch("register/users", {
+                    method: 'POST',
+			        body: JSON.stringify({account_input, password_input, address_input, email_input, ISO_birthdate}),
+			        headers: {
+				'content-type': 'application/json'
+			    }
+		    });
+                console.log("Register Success!");
+                register_success = true;
+            }
         }
     }
 
@@ -146,3 +204,4 @@
         class="btn variant-filled" >Submit
     </button>
 </div>
+

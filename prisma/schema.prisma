@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cart_item {
+  cart_ID    Int
+  product_ID Int
+  quantity   Int
+  prices     Decimal? @db.Decimal(8, 2)
+
+  @@id([cart_ID, product_ID])
+  @@index([product_ID], map: "product_ID")
+}
+
+model ggg {
+  id        String   @id @db.VarChar(20)
+  studentId String   @db.VarChar(20)
+  name      String   @db.VarChar(20)
+  birthday  DateTime @db.Date
+}
+
+model likes {
+  user_ID    Int
+  product_ID Int
+
+  @@id([user_ID, product_ID])
+  @@index([product_ID], map: "product_ID")
+}
+
+model order_item {
+  order_ID   Int
+  product_ID Int
+  quantity   Int
+  prices     Decimal? @db.Decimal(8, 2)
+
+  @@id([order_ID, product_ID])
+  @@index([product_ID], map: "product_ID")
+}
+
+model orders {
+  order_ID Int  @id @default(autoincrement())
+  user_ID  Int
+  status   Int? @default(0)
+
+  @@index([user_ID], map: "user_ID")
+}
+
+model paying {
+  order_ID   Int
+  payment_ID Int
+
+  @@id([order_ID, payment_ID])
+  @@index([payment_ID], map: "payment_ID")
+}
+
+model paying_info {
+  payment_ID         Int       @id @default(autoincrement())
+  bank_account       String    @db.VarChar(25)
+  bank_num           String    @db.VarChar(30)
+  delivering_address String    @db.VarChar(120)
+  total_price        Decimal?  @default(0.00) @db.Decimal(8, 2)
+  time_slot          DateTime? @db.Timestamp(0)
+}
+
+model product {
+  product_ID   Int      @id @default(autoincrement())
+  product_name String   @db.VarChar(80)
+  discount     Float?   @default(1)
+  stock        Int?     @default(0)
+  price        Decimal? @default(0.00) @db.Decimal(8, 2)
+  tags         String?  @db.VarChar(80)
+  sales        Int?     @default(0)
+  likes        Int?     @default(0)
+  avg_score    Float?
+}
+
+model search_history {
+  user_ID Int
+  keyword String @db.VarChar(80)
+
+  @@id([user_ID, keyword])
+}
+
+model user {
+  user_ID         Int       @id @default(autoincrement())
+  account         String    @unique(map: "account") @db.VarChar(50)
+  password        String    @db.Char(60)
+  enrollment_date DateTime? @db.Date
+  address         String    @db.VarChar(120)
+  email_address   String    @db.VarChar(80)
+  birthdate       DateTime  @db.Date
+  age             Int?
+}
+
+model user_phone {
+  user_ID      Int
+  phone_number String @db.VarChar(18)
+
+  @@id([user_ID, phone_number])
+}
