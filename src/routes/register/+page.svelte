@@ -118,6 +118,44 @@
 
 </style>
 
+<h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
+    <span class="gradient-heading">Register Your First Account!</span>
+</h1>
+
+
+<!-- this part is warning that will show if the account is existed. -->
+<div>
+    {#if warning_visible}
+        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+            <div class="alert-message">
+                <h3 class="h3">WARNING!</h3>
+                <p>Account has been registered!</p>
+            </div>
+            <div class="alert-actions">
+                <button on:click={pressed_warning_button}
+                    id = "warning_button"
+                    type="button"
+                    class="btn variant-filled" >OK
+                </button>
+            </div>
+        </aside>
+    {:else if register_success}
+        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+            <div class="alert-message">
+                <h3 class="h3">Congradulation!</h3>
+                <p>Account has been registered successfully!</p>
+            </div>
+            <div class="alert-actions">
+                <button on:click={pressed_register_success_button}
+                    id = "register_success_button"
+                    type="button"
+                    class="btn variant-filled" >YEAH!
+                </button>
+            </div>
+        </aside>
+    {/if}
+</div>
+
 
 <div>
     <table class ="table-comfortable">
@@ -187,9 +225,9 @@
         <tr in:fly={{ y: 20 }}>
             <td><label id="label-BD" for="Birth_Date">Birth Date (ex:2004/03/18)</label></td>
             <td><input
-                bind:value={birth_date_input}
+                bind:value={birthdate_input}
                 class="input"
-                type="text"
+                type="date"
                 id = "Birth_Date"
                 placeholder="Enter your birth date..." />
             </td>

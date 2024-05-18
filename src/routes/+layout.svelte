@@ -9,14 +9,6 @@
         margin: 0;
         padding: 0;
     }
-    .breadcrumb {
-        display: flex;
-        justify-content: right;
-        list-style-type: none;
-        padding: 0;
-        margin: 0 10px; 
-        font-family: "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"    
-    }
 
     /* :global(div) {
         display: flex;
