@@ -1,18 +1,68 @@
 <script>
     import { fly } from "svelte/transition";
     import { SlideToggle } from '@skeletonlabs/skeleton';
+
     let email_input = "";
     let account_input = "";
     let password_input = "";
     let address_input = "";
     let phone_number_input = "";
-    let birth_date_input = "";
+    let birthdate_input = "";
     let mask_password = false;
 
-
     let input_valid = false;
+    let warning_visible = false;
+    let register_success = false;
+
+
+    //action after pressed warning button
+    //will reset input and disable the warning
+    function pressed_warning_button(){
+        email_input = "";
+        account_input = "";
+        password_input = "";
+        address_input = "";
+        phone_number_input = "";
+        birthdate_input = "";
+        warning_visible = false;
+    }
+
+    //action after pressed success button
+    //will reset input and disable the warning
+    function pressed_register_success_button(){
+        email_input = "";
+        account_input = "";
+        password_input = "";
+        address_input = "";
+        phone_number_input = "";
+        birthdate_input = "";
+        register_success = false;
+    }
+
+    //return all users object
+    async function get_all_users(){
+        const response = await fetch("register/users");
+        let all_users_object = await response.json();
+        return all_users_object;
+    }
+
+    //to check the account existence
+    //if existence will return true
+    async function check_account_existence(){
+        let all_users_object = await get_all_users();
+        for(const user of all_users_object){
+            if(user.account == account_input){
+                warning_visible = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     //check whether the input is valid
-    function check_valid(){
+    //if valid then will register
+    async function check_valid(){
         if(!email_input){
             return;
         }
@@ -28,17 +78,26 @@
         if(!phone_number_input){
             return;
         }
-        if(!birth_date_input){
+        if(!birthdate_input){
             return;
         }
         input_valid = true;
         if(input_valid){
-            console.log(email_input);
-            console.log(account_input);
-            console.log(password_input);
-            console.log(address_input);
-            console.log(phone_number_input);
-            console.log(birth_date_input);
+            //check_result contain the result of check_account_existence
+            let check_result = await check_account_existence()
+            if(!check_result){
+                let date_birthdate = new Date(birthdate_input);
+                let ISO_birthdate = date_birthdate.toISOString();
+                const response = await fetch("register/users", {
+                    method: 'POST',
+			        body: JSON.stringify({account_input, password_input, address_input, email_input, ISO_birthdate}),
+			        headers: {
+				'content-type': 'application/json'
+			    }
+		    });
+                console.log("Register Success!");
+                register_success = true;
+            }
         }
     }
 
@@ -59,6 +118,39 @@
     <span class="gradient-heading">Register Your First Account!</span>
 </h1>
 
+
+<!-- this part is warning that will show if the account is existed. -->
+<div>
+    {#if warning_visible}
+        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+            <div class="alert-message">
+                <h3 class="h3">WARNING!</h3>
+                <p>Account has been registered!</p>
+            </div>
+            <div class="alert-actions">
+                <button on:click={pressed_warning_button}
+                    id = "warning_button"
+                    type="button"
+                    class="btn variant-filled" >OK
+                </button>
+            </div>
+        </aside>
+    {:else if register_success}
+        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+            <div class="alert-message">
+                <h3 class="h3">Congradulation!</h3>
+                <p>Account has been registered successfully!</p>
+            </div>
+            <div class="alert-actions">
+                <button on:click={pressed_register_success_button}
+                    id = "register_success_button"
+                    type="button"
+                    class="btn variant-filled" >YEAH!
+                </button>
+            </div>
+        </aside>
+    {/if}
+</div>
 
 <label>
     <div>
@@ -103,7 +195,9 @@
                     {/if}
                 </td>
                 <td>
-                    <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm">visibility</SlideToggle>
+                    <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
+                        visibility
+                    </SlideToggle>
                 </td>      
             </tr>
             <tr in:fly={{ y: 20 }}>
@@ -127,13 +221,13 @@
                 </td>
             </tr>
             <tr in:fly={{ y: 20 }}>
-                <td><span>Birth Date (ex:2004/03/18)</span></td>
+                <td><span>Birth Date</span></td>
                 <td><input
-                    bind:value={birth_date_input}
+                    bind:value={birthdate_input}
                     class="input"
-                    type="text"
+                    type="date"
                     id = "Birth_Date"
-                    placeholder="Enter your birth date..." />
+                    placeholder="yyyy-mm--dd" >
                 </td>
             </tr>
         </table>
@@ -147,3 +241,4 @@
         class="btn variant-filled" >Submit
     </button>
 </div>
+
