@@ -15,3 +15,23 @@
 	@apply bg-gradient-to-br;
 	@apply from-cyan-300 to-red-300;
 }
+
+.svelte-body {
+	display: contents;
+	position: relative;
+	z-index: 1;
+}
+.particles-container {
+	position: absolute;
+	min-height: 100vh;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: -1;
+	opacity: 0.7;
+}
+
+.particles-in-class {
+	position: absolute;
+	inset: 0px;
+}

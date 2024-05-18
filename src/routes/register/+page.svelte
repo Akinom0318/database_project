@@ -1,7 +1,6 @@
 <script>
-    import { fly } from "svelte/transition";
     import { SlideToggle } from '@skeletonlabs/skeleton';
-
+    import { fly } from "svelte/transition";
     let email_input = "";
     let account_input = "";
     let password_input = "";
@@ -112,127 +111,91 @@
         border-spacing: 5px 20px;
     }
 
+    /* .toggle-vis {
+        display: flex;
+        justify-content:flex-start;
+    } */
+
 </style>
 
-<h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
-    <span class="gradient-heading">Register Your First Account!</span>
-</h1>
 
-
-<!-- this part is warning that will show if the account is existed. -->
 <div>
-    {#if warning_visible}
-        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
-            <div class="alert-message">
-                <h3 class="h3">WARNING!</h3>
-                <p>Account has been registered!</p>
-            </div>
-            <div class="alert-actions">
-                <button on:click={pressed_warning_button}
-                    id = "warning_button"
-                    type="button"
-                    class="btn variant-filled" >OK
-                </button>
-            </div>
-        </aside>
-    {:else if register_success}
-        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
-            <div class="alert-message">
-                <h3 class="h3">Congradulation!</h3>
-                <p>Account has been registered successfully!</p>
-            </div>
-            <div class="alert-actions">
-                <button on:click={pressed_register_success_button}
-                    id = "register_success_button"
-                    type="button"
-                    class="btn variant-filled" >YEAH!
-                </button>
-            </div>
-        </aside>
-    {/if}
-</div>
-
-<label>
-    <div>
-        <table class ="table-comfortable">
-            <tr in:fly={{ y: 20 }}>
-                <td ><span>Email</span></td>
-                <td><input 
-                    bind:value={email_input}
-                    class="input"
-                    type="text"
-                    id = "Email"
-                    placeholder="Enter your Email..." />
-                </td>
-            </tr>
-            <tr in:fly={{ y: 20 }} >
-                <td><span>Account</span></td>
-                <td><input 
-                    bind:value={account_input}
-                    class="input"
-                    type="text"
-                    id = "Account"
-                    placeholder="Enter your account..." />
-                </td>
-            </tr>
-            <tr in:fly={{ y: 20 }}>
-                <td><span>Password</span></td>
-                <td>
-                    {#if mask_password === true}
+    <table class ="table-comfortable">
+        <tr in:fly={{ y: 20 }}>
+            <td ><label id="label-Email" for="Email">Email</label></td>
+            <td><input 
+                bind:value={email_input}
+                class="input"
+                type="text"
+                id = "Email"
+                placeholder="Enter your Email..." />
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }} >
+            <td><label id="label-acc" for="Account">Account</label></td>
+            <td><input 
+                bind:value={account_input}
+                class="input"
+                type="text"
+                id = "Account"
+                placeholder="Enter your account..." />
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-pwd" for="Password">Password</label></td>
+            <td>
+                {#if mask_password === true}
+                <input
+                bind:value={password_input}
+                class="input"
+                type = "text"
+                id = "Password"
+                placeholder="Enter your Password..." />
+                {:else}
                     <input
                     bind:value={password_input}
                     class="input"
-                    type = "text"
+                    type = "password"
                     id = "Password"
                     placeholder="Enter your Password..." />
-                    {:else}
-                        <input
-                        bind:value={password_input}
-                        class="input"
-                        type = "password"
-                        id = "Password"
-                        placeholder="Enter your Password..." />
-                    {/if}
-                </td>
-                <td>
-                    <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
-                        visibility
-                    </SlideToggle>
-                </td>      
-            </tr>
-            <tr in:fly={{ y: 20 }}>
-                <td><span>Address</span></td>
-                <td><input
-                    bind:value={address_input}
-                    class="input"
-                    type="text"
-                    id = "Address"
-                    placeholder="Enter your Address..." />
-                </td>
-            </tr>
-            <tr in:fly={{ y: 20 }}>
-                <td><span>Phone Number</span></td>
-                <td><input 
-                    bind:value={phone_number_input}
-                    class="input"
-                    type="text"
-                    id = "Phone_Number"
-                    placeholder="Enter your phone number..." />
-                </td>
-            </tr>
-            <tr in:fly={{ y: 20 }}>
-                <td><span>Birth Date</span></td>
-                <td><input
-                    bind:value={birthdate_input}
-                    class="input"
-                    type="date"
-                    id = "Birth_Date"
-                    placeholder="yyyy-mm--dd" >
-                </td>
-            </tr>
-        </table>
-    </div>
-</label>
+                {/if}
+            </td>
+            <td class="toggle-vis">
+                <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm">visibility</SlideToggle>
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-address" for="Address">Address</label></td>
+            <td><input
+                bind:value={address_input}
+                class="input"
+                type="text"
+                id = "Address"
+                placeholder="Enter your Address..." />
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-phoneNumber" for="Phone_Number">Phone Number</label></td>
+            <td><input 
+                bind:value={phone_number_input}
+                class="input"
+                type="text"
+                id = "Phone_Number"
+                placeholder="Enter your phone number..." />
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-BD" for="Birth_Date">Birth Date (ex:2004/03/18)</label></td>
+            <td><input
+                bind:value={birth_date_input}
+                class="input"
+                type="text"
+                id = "Birth_Date"
+                placeholder="Enter your birth date..." />
+            </td>
+        </tr>
+    </table>
+</div>
 
 <div style="display: flex; justify-content: center;" in:fly={{ y: 20 }}>
     <button on:click={check_valid}
