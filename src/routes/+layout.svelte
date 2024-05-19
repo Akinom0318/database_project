@@ -1,6 +1,7 @@
 <script>
 	import '../app.postcss';
     import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+
     import {current_account} from "../store.js";
 
 	let local_current_account = "";
@@ -63,5 +64,6 @@
 		{local_current_account}
 	</p>
 {/if}
+
 
 <slot />
