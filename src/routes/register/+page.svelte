@@ -27,7 +27,7 @@
     }
 
     //action after pressed success button
-    //will reset input and disable the warning
+    //will reset input and disable the success warning
     function pressed_register_success_button(){
         email_input = "";
         account_input = "";
@@ -199,7 +199,10 @@
                 {/if}
             </td>
             <td class="toggle-vis">
-                <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm">visibility</SlideToggle>
+                    <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
+                        visibility
+                    </SlideToggle>
+
             </td>
         </tr>
         <tr in:fly={{ y: 20 }}>
