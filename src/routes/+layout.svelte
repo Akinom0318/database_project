@@ -2,6 +2,17 @@
 	import '../app.postcss';
     import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 
+    import {current_account} from "../store.js";
+
+	let local_current_account = "";
+	current_account.subscribe((value) => {
+		local_current_account = value;
+	});
+
+	function log_out(){
+		$current_account = "";
+	};
+
 </script>
 
 <style>
@@ -30,16 +41,29 @@
 	<TabAnchor href="/">
 		<svelte:fragment slot="lead">Home</svelte:fragment>
 	</TabAnchor>
-	<TabAnchor href="/login">
-		<svelte:fragment slot="lead">Login</svelte:fragment>
-	</TabAnchor>
+	{#if !local_current_account}
+		<TabAnchor href="/login">
+			<svelte:fragment slot="lead">Login</svelte:fragment>
+		</TabAnchor>
+	{/if}
+	{#if local_current_account}
+		<TabAnchor>
+			<button on:click={log_out}
+				id = "Log_out_button"
+				type="button">Log out
+			</button>
+		</TabAnchor>
+	{/if}
 	<TabAnchor href="/register">
-		<svelte:fragment slot="lead">register</svelte:fragment>
-	</TabAnchor>
-	<TabAnchor href="/test">
-		<svelte:fragment slot="lead">test</svelte:fragment>
+		<svelte:fragment slot="lead">Register</svelte:fragment>
 	</TabAnchor>
 </TabGroup>
+
+{#if local_current_account}
+	<p>
+		{local_current_account}
+	</p>
+{/if}
 
 
 <slot />
