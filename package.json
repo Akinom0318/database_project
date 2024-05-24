@@ -21,6 +21,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@tailwindcss/forms": "0.5.7",
     "@tailwindcss/typography": "0.5.13",
+    "@tsconfig/svelte": "^5.0.4",
     "autoprefixer": "10.4.19",
     "postcss": "8.4.38",
     "prettier": "^3.1.1",
@@ -28,8 +29,9 @@
     "prisma": "^5.14.0",
     "svelte": "^4.2.7",
     "svelte-check": "^3.6.0",
+    "svelte-preprocess": "^5.1.4",
     "tailwindcss": "3.4.3",
-    "typescript": "^5.0.0",
+    "typescript": "^5.4.5",
     "vite": "^5.0.3",
     "vite-plugin-tailwind-purgecss": "0.3.3"
   },

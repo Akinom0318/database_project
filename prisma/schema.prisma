@@ -102,6 +102,7 @@ model product {
   cart_item    cart_item[]
   liking_list  liking_list[]
   order_item   order_item[]
+
 }
 
 model search_history {
