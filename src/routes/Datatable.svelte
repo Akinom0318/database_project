@@ -23,7 +23,7 @@
 	</header>
 	<table class="table table-hover table-compact w-full table-auto">
 		<thead>
-			<tr>
+			<tr >
 				<ThSort {handler} orderBy="product_name">Product Name</ThSort>
 				<ThSort {handler} orderBy="price">Price</ThSort>
 				<ThSort {handler} orderBy="sales">Sales</ThSort>

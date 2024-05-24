@@ -1,7 +1,3 @@
-.DS_Store
-/build
-/.svelte-kit
-/package
 .env
 .env.*
 !.env.example
