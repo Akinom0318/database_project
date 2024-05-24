@@ -13,10 +13,12 @@ export async function GET() {
 export async function POST(evt) {
     const data = await evt.request.json();
     await database.create_new_user_db(
+
         data.account_input,
         data.password_input,
         data.address_input,
         data.email_input,
         data.ISO_birthdate);
+
     return json({ok:true});
 }

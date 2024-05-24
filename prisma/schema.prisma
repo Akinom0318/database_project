@@ -37,6 +37,7 @@ model order_item {
   orders     orders   @relation(fields: [order_ID], references: [order_ID], onDelete: Cascade, onUpdate: NoAction, map: "order_item_ibfk_1")
   product    product  @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "order_item_ibfk_2")
 
+
   @@id([order_ID, product_ID])
   @@index([product_ID], map: "product_ID")
 }
@@ -58,6 +59,7 @@ model paying {
   payment_ID  Int
   orders      orders      @relation(fields: [order_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "paying_ibfk_1")
   paying_info paying_info @relation(fields: [payment_ID], references: [payment_ID], onDelete: Cascade, onUpdate: NoAction, map: "paying_ibfk_2")
+
 
   @@id([order_ID, payment_ID])
   @@index([payment_ID], map: "payment_ID")
@@ -86,6 +88,7 @@ model product {
   cart_item    cart_item[]
   liking_list  liking_list[]
   order_item   order_item[]
+
 }
 
 model search_history {
@@ -110,12 +113,14 @@ model user {
   orders          orders[]
   search_history  search_history[]
   user_phone      user_phone[]
+
 }
 
 model user_phone {
   user_ID      Int
   phone_number String @db.VarChar(18)
   user         user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "user_phone_ibfk_1")
+
 
   @@id([user_ID, phone_number])
 }

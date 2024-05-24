@@ -1,9 +1,11 @@
 <script>
 	import '../app.postcss';
-    import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
-    import {current_account} from "../store.js";
+  import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
+
+  import {current_account} from "../store.js";
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 						
+
 	let local_current_account = "";
 	current_account.subscribe((value) => {
 		local_current_account = value;

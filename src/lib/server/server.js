@@ -1,10 +1,12 @@
 // @ts-ignore
+
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 //return all users
 export async function get_users_db() {
+
     const allUsers = await prisma.user.findMany()
     return allUsers;
   }
