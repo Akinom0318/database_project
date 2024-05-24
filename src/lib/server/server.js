@@ -6,16 +6,16 @@ const prisma = new PrismaClient()
 
 //return all users
 export async function get_users_db() {
-
     const allUsers = await prisma.user.findMany()
     return allUsers;
-  }
+}
 
 export async function get_products_db(){
     const allProducts = await prisma.product.findMany()
     return allProducts;
   }
 
+//! Function
 // @ts-ignore
 export async function create_new_user_db(account_input, password_input, address_input, email_input, birthdate_input) {
   await prisma.user.create({

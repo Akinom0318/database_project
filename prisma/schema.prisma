@@ -7,12 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  user_ID         Int              @id @default(autoincrement())
+  account         String           @unique(map: "account") @db.VarChar(50)
+  password        String           @db.Char(60)
+  enrollment_date DateTime?        @db.Date
+  address         String           @db.VarChar(120)
+  email_address   String           @db.VarChar(80)
+  birthdate       DateTime         @db.Date
+  age             Int?
+  cart_item       cart_item[]
+  liking_list     liking_list[]
+  orders          orders[]
+  search_history  search_history[]
+  user_phone      user_phone[]
+}
+
 model cart_item {
   cart_ID    Int
   product_ID Int
   quantity   Int
   prices     Decimal? @db.Decimal(8, 2)
-  user       user     @relation(fields: [cart_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_1")
+  User       User     @relation(fields: [cart_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_1")
   product    product  @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_2")
 
   @@id([cart_ID, product_ID])
@@ -22,7 +38,7 @@ model cart_item {
 model liking_list {
   user_ID    Int
   product_ID Int
-  user       user    @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_1")
+  User       User    @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_1")
   product    product @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_2")
 
   @@id([user_ID, product_ID])
@@ -37,17 +53,16 @@ model order_item {
   orders     orders   @relation(fields: [order_ID], references: [order_ID], onDelete: Cascade, onUpdate: NoAction, map: "order_item_ibfk_1")
   product    product  @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "order_item_ibfk_2")
 
-
   @@id([order_ID, product_ID])
   @@index([product_ID], map: "product_ID")
 }
 
 model orders {
-  order_ID   Int          @unique @default(autoincrement())
-  user_ID    Int          @unique
+  order_ID   Int          @unique(map: "order_ID") @default(autoincrement())
+  user_ID    Int
   status     Int?         @default(0)
   order_item order_item[]
-  user       user         @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "orders_ibfk_1")
+  User       User         @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "orders_ibfk_1")
   paying     paying[]
 
   @@id([order_ID, user_ID])
@@ -57,9 +72,8 @@ model orders {
 model paying {
   order_ID    Int
   payment_ID  Int
-  orders      orders      @relation(fields: [order_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "paying_ibfk_1")
+  orders      orders      @relation(fields: [order_ID], references: [order_ID], onDelete: Cascade, onUpdate: NoAction, map: "paying_ibfk_1")
   paying_info paying_info @relation(fields: [payment_ID], references: [payment_ID], onDelete: Cascade, onUpdate: NoAction, map: "paying_ibfk_2")
-
 
   @@id([order_ID, payment_ID])
   @@index([payment_ID], map: "payment_ID")
@@ -94,33 +108,15 @@ model product {
 model search_history {
   user_ID Int
   keyword String @db.VarChar(80)
-  user    user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "search_history_ibfk_1")
+  User    User   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "search_history_ibfk_1")
 
   @@id([user_ID, keyword])
-}
-
-model user {
-  user_ID         Int              @id @default(autoincrement())
-  account         String           @unique(map: "account") @db.VarChar(50)
-  password        String           @db.Char(60)
-  enrollment_date DateTime?        @db.Date
-  address         String           @db.VarChar(120)
-  email_address   String           @db.VarChar(80)
-  birthdate       DateTime         @db.Date
-  age             Int?
-  cart_item       cart_item[]
-  liking_list     liking_list[]
-  orders          orders[]
-  search_history  search_history[]
-  user_phone      user_phone[]
-
 }
 
 model user_phone {
   user_ID      Int
   phone_number String @db.VarChar(18)
-  user         user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "user_phone_ibfk_1")
-
+  User         User   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "user_phone_ibfk_1")
 
   @@id([user_ID, phone_number])
 }

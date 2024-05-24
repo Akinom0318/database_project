@@ -1,4 +1,5 @@
 <script>
+	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
   import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 
@@ -22,6 +23,11 @@
         margin: 0;
         padding: 0;
     }
+
+	:global(label){
+		font-weight: bold;
+		font-size: 16px;
+	}
 
     /* :global(div) {
         display: flex;
@@ -70,5 +76,12 @@
 	</TabAnchor>
 	{/if}
 </TabGroup>
+
+{#if local_current_account}
+	<p id="User-account">
+		User: {local_current_account}
+	</p>
+{/if}
+
 
 <slot />

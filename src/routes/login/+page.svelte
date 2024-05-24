@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
 // @ts-nocheck
-
-    import { fly } from "svelte/transition";
     import { SlideToggle } from '@skeletonlabs/skeleton';
-    import {current_account} from "../../store";
+    import { fly } from "svelte/transition";
+    import { current_account } from "../../store";
+    import MessageModal from '../MessageModal.svelte';
 
     let local_current_account = "";
     let account_input = "";
@@ -13,6 +13,14 @@
     let login = false;
     let pressed_login = false;
     let account_existence = false;
+
+    //! Message Showing
+    let modalMessage = '';
+    let modalVisible = false;
+    function showModal(message: string) {
+        modalMessage = message;
+        modalVisible = true;
+    }
 
     //return all users object
     async function get_all_users(){
@@ -56,14 +64,27 @@
 
     let input_valid = false;
 
+    //! Check if input has whitespace
+    function containsWhiteSpace() {
+        const whiteSpaceAccount = account_input.includes(" ");
+        if(whiteSpaceAccount) {
+            showModal("Account cannot contain whitespace.");
+            return false;
+        }
+        const whiteSpacePassword = password_input.includes(" ");
+        if(whiteSpacePassword) {
+            showModal("Password cannot contain whitespace.");
+            return false;
+        }
+        return true;
+    }
+
     //check whether the input is valid
     async function check_valid(){
-        if(!account_input){
-            return;
-        }
-        if(!password_input){
-            return;
-        }
+        if(!account_input){ return;}
+        if(!password_input){ return;}
+        if(!containsWhiteSpace()){ return;}
+        
         input_valid = true;
         if(input_valid){
             account_existence = await check_account_existence();
@@ -85,13 +106,35 @@
         border-spacing: 5px 20px;
     }
 
+    h1 {
+        margin-top: 15px;
+    }
+
+    #login-container {
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #label-account, #label-pwd {
+        padding-right: 20px;
+    }
+
+    #login-message {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+        width: 100%;
+    }
+
 </style>
 
-<h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
-    <span class="gradient-heading">Welcome! {local_current_account}</span>
-</h1>
+<!-- Message Box -->
+<MessageModal bind:visible={modalVisible} bind:message={modalMessage} />
 
-<div>
+<div id="login-message">
     {#if login}
         <div>
             <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
@@ -113,7 +156,7 @@
     <div>
         <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
             <div class="alert-message">
-                <h2 class="h2">The account does not exist!</h2>
+                <h3 class="h3">The account does not exist!</h3>
                 <h4 class="h4">Please check the account and password!</h4>
             </div>
             <div class="alert-actions">
@@ -128,52 +171,57 @@
     {/if}
 </div>
 
-<label>
-    <div>
+<h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
+    <span class="gradient-heading">Welcome! {local_current_account}</span>
+</h1>
+
+<form on:submit|preventDefault={check_valid}>
+    <div id="login-container">
         <table class ="table-comfortable">
             <tr in:fly={{ y: 20 }}>
-                <td><span>Account</span></td>
+                <td><label id="label-account" for="Account">Account<span style="color: red;">*</span></label></td>
                 <td><input 
                     bind:value={account_input}
                     class="input"
                     type="text"
                     id = "Account"
+                    minlength="1"
+                    maxlength="50"
                     placeholder="Enter your account..." />
                 </td>
             </tr>
             <tr in:fly={{ y: 20 }}>
-                <td><span>Password</span></td>
+                <td><label id="label-pwd" for="Password">Password<span style="color: red;">*</span></label></td>
                 <td>
                     {#if mask_password === true}
                         <input
-                        bind:value={password_input}
-                        class="input"
-                        type = "text"
-                        id = "Password"
-                        placeholder="Enter your Password..." />
+                            bind:value={password_input}
+                            class="input"
+                            type = "text"
+                            id = "Password"
+                            minlength="4"
+                            maxlength="55"
+                            placeholder="Enter your Password..." />
                     {:else}
                         <input
-                        bind:value={password_input}
-                        class="input"
-                        type = "password"
-                        id = "Password"
-                        placeholder="Enter your Password..." />
+                            bind:value={password_input}
+                            class="input"
+                            type = "password"
+                            id = "Password"
+                            minlength="4"
+                            maxlength="55"
+                            placeholder="Enter your Password..." />
                     {/if}
                 </td>
                 <td>
-                        <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
-                            visibility
-                        </SlideToggle>
-                </td>                
+                    <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
+                        visibility
+                    </SlideToggle>
+                </td>
             </tr>
         </table>
     </div>
-</label>
-
-<div style="display: flex; justify-content: center;" in:fly={{ y: 20 }}>
-    <button on:click={check_valid}
-        id = "Login_Button"
-        type="button"
-        class="btn variant-filled" >Login
-    </button>
-</div>
+    <div style="display: flex; justify-content: center;" in:fly={{ y: 20 }}>
+        <input type="submit" value="Login" class="btn variant-filled">
+    </div>
+</form>
