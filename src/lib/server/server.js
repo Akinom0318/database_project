@@ -1,14 +1,16 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
 //return all users
+//! Get the table data
 export async function get_all_users() {
     const allUsers = await prisma.user.findMany()
     return allUsers;
-  }
+}
 
 
+//! Function
 // @ts-ignore
 export async function create_new_user(account_input, password_input, address_input, email_input, birthdate_input) {
   await prisma.user.create({
