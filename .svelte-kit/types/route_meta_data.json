@@ -1,0 +1,15 @@
+{
+	"/": [
+		"src/routes/+page.js",
+		"src/routes/+page.server.js"
+	],
+	"/login": [],
+	"/login/users": [
+		"src/routes/login/users/+server.js"
+	],
+	"/register": [],
+	"/register/users": [
+		"src/routes/register/users/+server.js"
+	],
+	"/test": []
+}

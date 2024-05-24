@@ -1,9 +1,8 @@
 <script>
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
-  import { TabGroup, TabAnchor } from '@skeletonlabs/skeleton';
 
-  import {current_account} from "../store.js";
+  	import {current_account} from "../store.js";
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 						
 
