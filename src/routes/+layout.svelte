@@ -2,8 +2,8 @@
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
 
-  	import {current_account} from "../store.js";
 	import { LightSwitch } from '@skeletonlabs/skeleton';
+	import { current_account } from "../store.js";
 						
 
 	let local_current_account = "";
@@ -28,6 +28,34 @@
 		font-size: 16px;
 	}
 
+	#welcome-message {
+		padding-left: 5px;
+		padding-right: 13vw;
+		font-weight: bold;
+		font-size: 17px;
+		justify-content: center;
+	}
+
+	#home-icon {
+		font-size: 18px;
+	}
+
+	#left-container {
+		padding-left: 10px;
+	}
+
+	#light-switch {
+		padding-right: 8px;
+	}
+
+	#Log_out_button {
+		padding: 10px 13px;
+		border-radius: 18px;
+		margin-right: 5px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
     /* :global(div) {
         display: flex;
         justify-content: center;
@@ -37,50 +65,51 @@
 
 </style>
 
+<!-- hover="hover:variant-soft-primary" -->
 <TabGroup 
-	justify="justify-left"
 	active="variant-filled-primary"
-	hover="hover:variant-soft-primary"
-	flex="flex-1 lg:flex-none"
 	rounded=10px
 	border=10px
-	class="bg-surface-100-800-token w-full">
-	<TabAnchor href="/">
-		<svelte:fragment slot="lead">Home</svelte:fragment>
-	</TabAnchor>
-	{#if !local_current_account}
-		<TabAnchor href="/login">
-			<svelte:fragment slot="lead">Login</svelte:fragment>
+	flex="flex-1 lg:flex-none"
+	class="bg-surface-100-800-token w-full items-center justify-between font-bold">
+	<div id="left-container" class="flex flex-1 space-x-3 items-center justify-start">
+		<TabAnchor href="/" class="text-center">
+			<svelte:fragment slot="lead"><span id="home-icon" style="color: cadetblue">&#9750;</span> Home</svelte:fragment>
 		</TabAnchor>
-	{/if}
-	<TabAnchor href="/register">
-		<svelte:fragment slot="lead">Register</svelte:fragment>
-	</TabAnchor>
-	<TabAnchor>
-		<LightSwitch />
-	</TabAnchor>
-	<!-- TODO: help me justify the log out ,Light Switch and "Welcome, user" -->
-	<!-- And maybe make the welcome message without TabAnchor-->
+		{#if !local_current_account}
+			<TabAnchor href="/login" class="text-center">
+				<svelte:fragment slot="lead"><span>&#10070;</span> Login</svelte:fragment>
+			</TabAnchor>
+		{/if}
+			<TabAnchor href="/register" class="text-center">
+				<svelte:fragment slot="lead"><span>&#9997;</span> Register</svelte:fragment>
+			</TabAnchor>
+	</div>
+	
 	{#if local_current_account}
-	<TabAnchor justify="justify-right">
-		<button on:click={log_out}
-			id = "Log_out_button"
-			type="button">Log out
-		</button>
-	</TabAnchor>
-	<TabAnchor justify="justify-right">
-		<p>
-			Welcome, {local_current_account}!
-		</p>
-	</TabAnchor>
+		<div id="welcome-container" class="flex items-center">
+			<p id="welcome-message" class="text-center">
+				<span style="color: red;">&#9733;</span> Welcome, {local_current_account}!
+			</p>
+		</div>
+		<div id="right-container" class="flex space-x-3 items-center justify-end">
+			<div id="light-switch">
+				<LightSwitch />
+			</div>
+			<button on:click={log_out}
+				id = "Log_out_button"
+				class="btn variant-filled"
+				type="button">Log out
+			</button>
+		</div>
 	{/if}
 </TabGroup>
 
-{#if local_current_account}
+<!--TODO I don't know what to do, so i comment it. -->
+<!-- {#if local_current_account}
 	<p id="User-account">
 		User: {local_current_account}
 	</p>
-{/if}
-
+{/if} -->
 
 <slot />

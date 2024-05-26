@@ -3,6 +3,7 @@
 		"src/routes/+page.js",
 		"src/routes/+page.server.js"
 	],
+	"/admin": [],
 	"/login": [],
 	"/login/users": [
 		"src/routes/login/users/+server.js"

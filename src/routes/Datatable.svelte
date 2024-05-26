@@ -1,10 +1,10 @@
 <script lang="ts">
-	import ThSort from '$lib/product_table/ThSort.svelte';
-	import ThFilter from '$lib/product_table/ThFilter.svelte';
-	import Search from '$lib/product_table/Search.svelte';
-	import RowsPerPage from '$lib/product_table/RowsPerPage.svelte';
-	import RowCount from '$lib/product_table/RowCount.svelte';
 	import Pagination from '$lib/product_table/Pagination.svelte';
+	import RowCount from '$lib/product_table/RowCount.svelte';
+	import RowsPerPage from '$lib/product_table/RowsPerPage.svelte';
+	import Search from '$lib/product_table/Search.svelte';
+	import ThFilter from '$lib/product_table/ThFilter.svelte';
+	import ThSort from '$lib/product_table/ThSort.svelte';
 
     import { DataHandler } from '@vincjo/datatables';
 
@@ -15,15 +15,30 @@
 
 </script>
 
+<style>
+	#product-container {
+		padding: 0.8rem;
+		font-size: 1.05rem;
+	}
 
-<div class="overflow-y-auto space-y-4">
+	#product-table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	.table tbody td {
+		font-size: 0.97rem;
+	}
+</style>
+
+<div id="product-container" class="overflow-y-auto space-y-4">
 	<header class="flex justify-between">
 		<Search {handler} />
 		<RowsPerPage {handler} />
 	</header>
-	<table class="table table-hover table-compact w-full table-auto">
+	<table id="product-table" class="table table-hover table-compact w-full table-auto">
 		<thead>
-			<tr >
+			<tr>
 				<ThSort {handler} orderBy="product_name">Product Name</ThSort>
 				<ThSort {handler} orderBy="price">Price</ThSort>
 				<ThSort {handler} orderBy="sales">Sales</ThSort>
@@ -43,7 +58,7 @@
 				<ThFilter {handler} filterBy="stock" />
 			</tr>
 		</thead>
-		<tbody style="text-align: center;">
+		<tbody id="content" style="text-align: center;">
 			<!-- display each product as following order: -->
 			<!-- currently the price and discount attribute is not compatible-->
 			<!-- in the above feature will result in some display error-->

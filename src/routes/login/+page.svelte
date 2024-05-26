@@ -5,6 +5,8 @@
     import { current_account } from "../../store";
     import MessageModal from '../MessageModal.svelte';
 
+    //! Admin Account: admin
+    let isAdmin = false;
     let local_current_account = "";
     let account_input = "";
     let password_input = "";
@@ -42,6 +44,7 @@
         password_input = "";
         account_existence = false;
         pressed_login = false;
+        isAdmin = false;
     }
 
     //to check the account existence
@@ -90,6 +93,10 @@
             account_existence = await check_account_existence();
             pressed_login = true;
             if(account_existence){
+                //! Check whether the user is Admin or normal user
+                if(local_current_account == "admin"){
+                    isAdmin = true;
+                }else{ isAdmin = false;}
                 login = true;
             }
         }
@@ -142,37 +149,47 @@
                     <h3 class="h3">Log in successful!</h3>
                 </div>
                 <div class="alert-actions">
-                    <a href="../">
-                        <button on:click={pressed_login_success}
-                            id = "login_button"
-                            type="button"
-                            class="btn variant-filled">OK
-                        </button>
-                    </a>
+                    {#if !isAdmin}
+                        <a href="../">
+                            <button on:click={pressed_login_success}
+                                id = "login_button"
+                                type="button"
+                                class="btn variant-filled">OK
+                            </button>
+                        </a>
+                    {:else}
+                        <a href="../admin">
+                            <button on:click={pressed_login_success}
+                                id="login_button"
+                                type="button"
+                                class="btn variant-filled">OK
+                            </button>
+                        </a>
+                    {/if}
                 </div>
             </aside>
         </div>
     {:else if !account_existence && pressed_login}
-    <div>
-        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
-            <div class="alert-message">
-                <h3 class="h3">The account does not exist!</h3>
-                <h4 class="h4">Please check the account and password!</h4>
-            </div>
-            <div class="alert-actions">
-                <button on:click={pressed_warning_button}
-                    id = "warning_button"
-                    type="button"
-                    class="btn variant-filled" >OK
-                </button>
-            </div>
-        </aside>
-    </div>
+        <div>
+            <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+                <div class="alert-message">
+                    <h3 class="h3">The account does not exist!</h3>
+                    <h4 class="h4">Please check the account and password!</h4>
+                </div>
+                <div class="alert-actions">
+                    <button on:click={pressed_warning_button}
+                        id = "warning_button"
+                        type="button"
+                        class="btn variant-filled">OK
+                    </button>
+                </div>
+            </aside>
+        </div>
     {/if}
 </div>
 
 <h1 class="h1" style="text-align: center;" in:fly={{ y: 20 }}>
-    <span class="gradient-heading">Welcome! {local_current_account}</span>
+    <span class="gradient-heading">Welcome ! {local_current_account}</span>
 </h1>
 
 <form on:submit|preventDefault={check_valid}>
