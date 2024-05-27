@@ -1,6 +1,7 @@
 <script>
     import { current_account } from "../../store";
-	import UserUi from "./users/UserUi.svelte";
+	  import UserUi from "./users/UserUi.svelte";
+
     let local_current_account = "";
 
     current_account.subscribe((value) => {
