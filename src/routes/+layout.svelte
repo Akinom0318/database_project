@@ -88,9 +88,11 @@
 	
 	{#if local_current_account}
 		<div id="welcome-container" class="flex items-center">
-			<p id="welcome-message" class="text-center">
-				<span style="color: red;">&#9733;</span> Welcome, {local_current_account}!
-			</p>
+			<a href="/user_UI">
+				<p id="welcome-message" class="text-center">
+					<span style="color: red;">&#9733;</span> Welcome, {local_current_account}!
+				</p>				
+			</a>
 		</div>
 		<div id="right-container" class="flex space-x-3 items-center justify-end">
 			<div id="light-switch">

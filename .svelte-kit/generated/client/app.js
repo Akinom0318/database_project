@@ -17,7 +17,7 @@ export const dictionary = {
 		"/admin": [3],
 		"/login": [4],
 		"/register": [5],
-		"/test": [6]
+		"/user_UI": [6]
 	};
 
 export const hooks = {
