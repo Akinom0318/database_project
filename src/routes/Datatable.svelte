@@ -40,7 +40,7 @@
 		<thead>
 			<tr>
 				<ThSort {handler} orderBy="product_name">Product Name</ThSort>
-				<ThSort {handler} orderBy="price">Price</ThSort>
+				<ThSort {handler} orderBy="selling_price">Price</ThSort>
 				<ThSort {handler} orderBy="sales">Sales</ThSort>
 				<ThSort {handler} orderBy="likes">Likes</ThSort>
 				<ThSort {handler} orderBy="avg_score">Average Score</ThSort>
@@ -57,14 +57,14 @@
 					<td>
 						{#if row.discount !== 1}
 							<s>
-								{row.price}
+								{row.original_price}
 							</s>
 							<b>
 								only
-								{row.price * (1 - row.discount)} now !
+								{row.selling_price}
 							</b>
 						{:else}
-							{row.price}
+							{row.selling_price}
 						{/if}
 					</td>
 					<td>{row.sales}</td>
