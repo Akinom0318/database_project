@@ -12,5 +12,8 @@
 	"/register/users": [
 		"src/routes/register/users/+server.js"
 	],
-	"/user_UI": []
+	"/user_UI": [],
+	"/user_UI/users": [
+		"src/routes/user_UI/users/+server.js"
+	]
 }

@@ -4,7 +4,7 @@
 	import RowsPerPage from '$lib/product_table/RowsPerPage.svelte';
 	import Search from '$lib/product_table/Search.svelte';
 	import ThSort from '$lib/product_table/ThSort.svelte';
-
+	import { Ratings } from '@skeletonlabs/skeleton';
     import { DataHandler } from '@vincjo/datatables';
 
 	export let data: any[];
@@ -28,6 +28,7 @@
 	.table tbody td {
 		font-size: 0.97rem;
 	}
+
 </style>
 
 <div id="product-container" class="overflow-y-auto space-y-4">
@@ -44,8 +45,6 @@
 				<ThSort {handler} orderBy="likes">Likes</ThSort>
 				<ThSort {handler} orderBy="avg_score">Average Score</ThSort>
 				<ThSort {handler} orderBy="tags">Tags</ThSort>
-				<ThSort {handler} orderBy="stock">In Stock</ThSort>
-
 			</tr>
 		</thead>
 		<tbody id="content" style="text-align: center;">
@@ -70,9 +69,14 @@
 					</td>
 					<td>{row.sales}</td>
 					<td>{row.likes}</td>
-					<td>{row.avg_score}</td>
+					<td>
+						<Ratings value = {row.avg_score} max = {5}>
+							<svelte:fragment slot="empty"><span><img src="src\lib\images\empty_star.png" alt="empty_star"></span></svelte:fragment>
+							<svelte:fragment slot="half"><span><img src="src\lib\images\half_star.png" alt="half_star"></span></svelte:fragment>
+							<svelte:fragment slot="full"><span><img src="src\lib\images\full_star.png" alt="full_stars"></span></svelte:fragment>
+						</Ratings>
+					</td>
 					<td>{row.tags}</td>
-					<td>{row.stock}</td>
 				</tr>
 			{:else}
 				<tr>

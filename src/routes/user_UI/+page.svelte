@@ -1,5 +1,6 @@
 <script>
     import { current_account } from "../../store";
+	import UserUi from "./users/UserUi.svelte";
     let local_current_account = "";
 
     current_account.subscribe((value) => {
@@ -12,15 +13,12 @@
 </style>
 
 <h1>
-    Here is for user UI!
     {#if local_current_account === "admin"}
         <p>
             do your admin UI here
         </p>
     {:else if local_current_account}
-        <p>
-            I will do my user UI here
-        </p>
+        <UserUi />
     {:else}
         <h1>
             Login first!
