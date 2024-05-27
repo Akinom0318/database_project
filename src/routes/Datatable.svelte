@@ -3,7 +3,6 @@
 	import RowCount from '$lib/product_table/RowCount.svelte';
 	import RowsPerPage from '$lib/product_table/RowsPerPage.svelte';
 	import Search from '$lib/product_table/Search.svelte';
-	import ThFilter from '$lib/product_table/ThFilter.svelte';
 	import ThSort from '$lib/product_table/ThSort.svelte';
 
     import { DataHandler } from '@vincjo/datatables';
@@ -47,15 +46,6 @@
 				<ThSort {handler} orderBy="tags">Tags</ThSort>
 				<ThSort {handler} orderBy="stock">In Stock</ThSort>
 
-			</tr>
-			<tr>
-				<ThFilter {handler} filterBy="product_name" />
-				<ThFilter {handler} filterBy="price" />
-				<ThFilter {handler} filterBy="sales" />
-				<ThFilter {handler} filterBy="likes" />
-				<ThFilter {handler} filterBy="avg_score" />
-				<ThFilter {handler} filterBy="tags" />
-				<ThFilter {handler} filterBy="stock" />
 			</tr>
 		</thead>
 		<tbody id="content" style="text-align: center;">
