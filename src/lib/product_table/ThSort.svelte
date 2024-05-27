@@ -8,8 +8,14 @@
 	const sorted = handler.getSort();
 </script>
 
+<style>
+	#attribute_name{
+		justify-content: center;
+	}
+</style>
+
 <th on:click={() => handler.sort(orderBy)} class="cursor-pointer select-none">
-	<div class="flex h-full items-center justify-start gap-x-2">
+	<div class="flex h-full items-center justify-start gap-x-2" id = "attribute_name">
 		<slot />
 		{#if $sorted.identifier === orderBy}
 			{#if $sorted.direction === 'asc'}
