@@ -1,7 +1,7 @@
 <script>
     import { fly } from "svelte/transition";
     import { current_account } from "../store.js";
-    import ProductTable from "./ProductTable.svelte";
+    import ProductTable from "./product_table_client/ProductTable.svelte";
 
     export let data;
 
@@ -18,7 +18,9 @@
 
     .login-detection{
         text-align: center;
-        margin: 50px;
+        margin-top: 10%;
+        margin-left: 20%;
+        margin-right: 20%;
     }
     
     #rickroll{

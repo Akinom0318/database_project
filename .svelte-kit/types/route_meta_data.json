@@ -8,6 +8,9 @@
 	"/login/users": [
 		"src/routes/login/users/+server.js"
 	],
+	"/product_table_client/cart_item": [
+		"src/routes/product_table_client/cart_item/+server.js"
+	],
 	"/register": [],
 	"/register/users": [
 		"src/routes/register/users/+server.js"

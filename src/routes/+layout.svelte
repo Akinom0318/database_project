@@ -100,7 +100,7 @@
 			</div>
 			<button on:click={log_out}
 				id = "Log_out_button"
-				class="btn variant-filled"
+				class="btn btn-sm variant-filled"
 				type="button">Log out
 			</button>
 		</div>

@@ -1,5 +1,6 @@
 <!-- MessageModal.svelte -->
 <script>
+    import { fly } from "svelte/transition";
     export let message = '';
     export let visible = false;
 
@@ -9,7 +10,7 @@
 </script>
 
 {#if visible}
-    <div class="modal">
+    <div class="modal" in:fly={{ y: 20 }}>
         <div class="modal-content">
             <button class="close" on:click={close}>&times;</button>
             <p>{message}</p>
