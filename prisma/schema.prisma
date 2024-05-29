@@ -8,7 +8,7 @@ datasource db {
 }
 
 model cart_item {
-  cart_ID    Int
+  cart_ID    Int 
   product_ID Int
   quantity   Int
   prices     Decimal? @db.Decimal(8, 2)

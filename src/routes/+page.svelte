@@ -1,7 +1,7 @@
 <script>
     import { fly } from "svelte/transition";
     import { current_account } from "../store.js";
-    import ProductTable from "./ProductTable.svelte";
+    import ProductTable from "./product_table_client/ProductTable.svelte";
 
     export let data;
 
@@ -46,6 +46,6 @@
                 </h2>
                 <img src="src\lib\images\rickroll.png" id="rickroll" alt="Get RickRoll!" width="30%" height="30%">
             </div>
-        </aside>
+        </aside>        
     </div>
 {/if}

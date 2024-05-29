@@ -6,6 +6,16 @@
 	import ThSort from '$lib/product_table/ThSort.svelte';
 	import { Ratings } from '@skeletonlabs/skeleton';
     import { DataHandler } from '@vincjo/datatables';
+	import AddToCart from './AddToCart.svelte';
+
+	let current_product = new Object();
+	let add_to_cart_visible = false;
+
+	//@ts-ignore
+	function add_to_cart(product){
+		current_product = product;
+		add_to_cart_visible = true;
+	}
 
 	export let data: any[];
     //Init data handler - SERVER
@@ -31,6 +41,8 @@
 
 </style>
 
+<AddToCart bind:product={current_product} bind:visible={add_to_cart_visible}/>
+
 <div id="product-container" class="overflow-y-auto space-y-4">
 	<header class="flex justify-between">
 		<Search {handler} />
@@ -41,16 +53,15 @@
 			<tr>
 				<ThSort {handler} orderBy="product_name">Product Name</ThSort>
 				<ThSort {handler} orderBy="selling_price">Price</ThSort>
-				<ThSort {handler} orderBy="sales">Sales</ThSort>
 				<ThSort {handler} orderBy="likes">Likes</ThSort>
 				<ThSort {handler} orderBy="avg_score">Average Score</ThSort>
 				<ThSort {handler} orderBy="tags">Tags</ThSort>
+				<h3 class="h3" style="text-align: center; padding-top: 12px;">
+					Buy it now!
+				</h3>
 			</tr>
 		</thead>
 		<tbody id="content" style="text-align: center;">
-			<!-- display each product as following order: -->
-			<!-- currently the price and discount attribute is not compatible-->
-			<!-- in the above feature will result in some display error-->
 			{#each $rows as row}
 				<tr>
 					<td>{row.product_name}</td>
@@ -67,7 +78,6 @@
 							{row.selling_price}
 						{/if}
 					</td>
-					<td>{row.sales}</td>
 					<td>{row.likes}</td>
 					<td>
 						<Ratings value = {row.avg_score} max = {5}>
@@ -77,6 +87,11 @@
 						</Ratings>
 					</td>
 					<td>{row.tags}</td>
+					<td>
+						<button on:click={() => {add_to_cart(row)}} type="button" class="btn btn-sm variant-filled-tertiary">
+							Add to cart
+						</button>
+					</td>
 				</tr>
 			{:else}
 				<tr>

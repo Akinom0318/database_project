@@ -55,6 +55,7 @@
             //check input user existence or not
             if(user.account === account_input && password_input === user.password){
                 $current_account = user.account;
+                $current_account_ID = user.user_ID
                 current_account.subscribe((value) => {
                     local_current_account = value;
                 });
