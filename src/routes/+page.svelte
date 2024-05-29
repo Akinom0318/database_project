@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { fly } from "svelte/transition";
     import { current_account } from "../store.js";
     import ProductTable from "./product_table_client/ProductTable.svelte";
