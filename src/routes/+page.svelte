@@ -32,9 +32,11 @@
 
 <!-- <p in:fly={{ y: 20 }} >Home page!</p> -->
 {#if local_current_account}
-    <div id="ProductTable-container">
-        <ProductTable data={data.products} />
-    </div>
+    {#if local_current_account != "admin"}
+        <div id="ProductTable-container">
+            <ProductTable data={data.products} />
+        </div>
+    {/if}
 {:else}
     <div class="login-detection">
         <aside class="alert variant-ghost-tertiary" in:fly={{ y: 20 }}>
@@ -44,6 +46,6 @@
                 </h2>
                 <img src="src\lib\images\rickroll.png" id="rickroll" alt="Get RickRoll!" width="30%" height="30%">
             </div>
-        </aside>        
+        </aside>
     </div>
 {/if}

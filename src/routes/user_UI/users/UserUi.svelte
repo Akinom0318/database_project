@@ -1,7 +1,7 @@
 <script>
-    import { current_account } from "../../../store";
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
+    import { current_account } from "../../../store";
 
     let email_input = "";
     let password_input = "";
@@ -106,18 +106,18 @@
 {/if}
 
 {#if modify_success}
-<aside class="alert variant-ghost-success" in:fly={{ y: 20 }}>
-    <div class="alert-message">
-        <h1 class="h1" style="text-align: left; padding-top: 0px;" >
-            Modify Success✅
-        </h1>
-    </div>
-    <div class="alert-actions">
-        <button on:click={modify_success_confirm} class="btn variant-filled">
-            OK
-        </button>
-    </div>
-</aside>
+    <aside class="alert variant-ghost-success" in:fly={{ y: 20 }}>
+        <div class="alert-message">
+            <h1 class="h1" style="text-align: left; padding-top: 0px;" >
+                Modify Success✅
+            </h1>
+        </div>
+        <div class="alert-actions">
+            <button on:click={modify_success_confirm} class="btn variant-filled">
+                OK
+            </button>
+        </div>
+    </aside>
 {/if}
 
 

@@ -1,6 +1,6 @@
 // @ts-ignore
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
@@ -47,3 +47,5 @@ export async function update_a_user_db(user_account, password_input, address_inp
     }
   })
 }
+
+//TODO update products

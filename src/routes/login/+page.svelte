@@ -2,8 +2,8 @@
 // @ts-nocheck
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
+    import MessageModal from '../../lib/MessageModal.svelte';
     import { current_account } from "../../store";
-    import MessageModal from '../MessageModal.svelte';
 
     //! Admin Account: admin
     let isAdmin = false;
@@ -98,6 +98,7 @@
                     isAdmin = true;
                 }else{ isAdmin = false;}
                 login = true;
+                console.log(login);
             }
         }
     };
@@ -204,7 +205,7 @@
                     id = "Account"
                     minlength="1"
                     maxlength="50"
-                    placeholder="Enter your account..." />
+                    placeholder="Enter your account..." required/>
                 </td>
             </tr>
             <tr in:fly={{ y: 20 }}>
@@ -218,7 +219,7 @@
                             id = "Password"
                             minlength="4"
                             maxlength="55"
-                            placeholder="Enter your Password..." />
+                            placeholder="Enter your Password..." required/>
                     {:else}
                         <input
                             bind:value={password_input}
@@ -227,7 +228,7 @@
                             id = "Password"
                             minlength="4"
                             maxlength="55"
-                            placeholder="Enter your Password..." />
+                            placeholder="Enter your Password..." required/>
                     {/if}
                 </td>
                 <td>
@@ -238,7 +239,7 @@
             </tr>
         </table>
     </div>
-    <div style="display: flex; justify-content: center;" in:fly={{ y: 20 }}>
+    <div style="display: flex; justify-content: center; font-weight: bold" in:fly={{ y: 20 }}>
         <input type="submit" value="Login" class="btn variant-filled">
     </div>
 </form>

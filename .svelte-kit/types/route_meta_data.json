@@ -13,6 +13,16 @@
 		"src/routes/register/users/+server.js"
 	],
 	"/user_UI": [],
+	"/user_UI/admin/product": [
+		"src/routes/user_UI/admin/product/+page.server.js",
+		"src/routes/user_UI/admin/product/+server.js"
+	],
+	"/user_UI/admin/transaction": [
+		"src/routes/user_UI/admin/transaction/+server.js"
+	],
+	"/user_UI/admin/userList": [
+		"src/routes/user_UI/admin/userList/+server.js"
+	],
 	"/user_UI/users": [
 		"src/routes/user_UI/users/+server.js"
 	]
