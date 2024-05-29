@@ -1,7 +1,7 @@
 <script lang="ts">
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
-    import MessageModal from '../MessageModal.svelte';
+    import MessageModal from '../../lib/MessageModal.svelte';
     import { isValidEmail, isValidPhoneNumber } from "./checkFormat";
     
     let email_input = "";
@@ -318,7 +318,7 @@
             </td>
         </tr>
     </table>
-    <div style="display: flex; justify-content: center;" in:fly={{ y: 20 }}>
+    <div style="display: flex; justify-content: center; font-weight: bold;" in:fly={{ y: 20 }}>
         <input type="submit" value="Submit" class="btn variant-filled">
     </div>
 </form>

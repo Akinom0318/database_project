@@ -18,9 +18,7 @@
 
     .login-detection{
         text-align: center;
-        margin-top: 10%;
-        margin-left: 20%;
-        margin-right: 20%;
+        margin: 50px;
     }
     
     #rickroll{
@@ -34,9 +32,11 @@
 
 <!-- <p in:fly={{ y: 20 }} >Home page!</p> -->
 {#if local_current_account}
-    <div id="ProductTable-container">
-        <ProductTable data={data.products} />
-    </div>
+    {#if local_current_account != "admin"}
+        <div id="ProductTable-container">
+            <ProductTable data={data.products} />
+        </div>
+    {/if}
 {:else}
     <div class="login-detection">
         <aside class="alert variant-ghost-tertiary" in:fly={{ y: 20 }}>

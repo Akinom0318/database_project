@@ -1,6 +1,6 @@
 // @ts-ignore
 
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
 
@@ -94,3 +94,4 @@ export async function add_to_card_db(user_ID,product_ID_input,quantity_input,pri
     })
   }
 }
+//TODO update products

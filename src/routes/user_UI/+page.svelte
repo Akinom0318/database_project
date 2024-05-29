@@ -1,6 +1,7 @@
 <script>
     import { current_account } from "../../store";
-	import UserUi from "./users/UserUi.svelte";
+    import Admin from "./admin/admin.svelte";
+    import UserUi from "./users/UserUi.svelte";
 
     let local_current_account = "";
 
@@ -14,7 +15,11 @@
 </style>
 
 {#if local_current_account}
-    <UserUi />
+    {#if local_current_account == "admin"}
+        <Admin />
+    {:else}
+        <UserUi />
+    {/if}
 {:else}
     <h1>
         Login first!
