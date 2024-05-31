@@ -23,7 +23,7 @@ export const dictionary = {
 		"/user_UI": [6],
 		"/user_UI/admin/product": [~7],
 		"/user_UI/admin/transaction": [8],
-		"/user_UI/admin/userList": [9]
+		"/user_UI/admin/userList": [~9]
 	};
 
 export const hooks = {
