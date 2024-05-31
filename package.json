@@ -38,6 +38,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/client": "^5.14.0",
-    "@vincjo/datatables": "^1.14.5"
+    "@vincjo/datatables": "^1.14.5",
+    "date-fns": "^3.6.0"
   }
 }
