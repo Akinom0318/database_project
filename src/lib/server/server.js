@@ -192,7 +192,7 @@ export async function check_cart_item_db(user_ID,product_ID_input){
 
 
 //update or create cart item
-export async function add_to_card_db(user_ID,product_ID_input,quantity_input,price_input){
+export async function add_to_cart_db(user_ID,product_ID_input,quantity_input,price_input){
   let tmp_cart_item = await check_cart_item_db(user_ID,product_ID_input);
 
   if(tmp_cart_item){
@@ -213,8 +213,8 @@ export async function add_to_card_db(user_ID,product_ID_input,quantity_input,pri
   }else{
     await prisma.cart_item.create({
       data:{
-        cart_ID: user_ID,
-        product_ID: product_ID_input,
+        cart_ID:user_ID,
+        product_ID:product_ID_input,
         quantity: quantity_input,
         prices: price_input
       }

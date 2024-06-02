@@ -60,13 +60,14 @@
 		}
 	}
 
+	//TODO
+	//need to prevent from 0 cart items
 	function after_order_button_pressed(){
 		order_button_pressed = false;
 	}
 
 	get_all_items();
 	
-
 </script>
 
 <style>
@@ -119,7 +120,6 @@
 {#if modify_visible}
 	<ModifyCart bind:product={current_product} bind:visible={modify_visible}/>
 {/if}
-
 
 <!--Out of stock message-->
 {#if out_of_stock_message}
