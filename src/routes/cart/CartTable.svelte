@@ -165,9 +165,10 @@
 				</td>
 			</tr>
 		</thead>
+
 		<tbody id="content" style="text-align: center;">
 			{#if loading}
-				{#if local_current_account_cart_item.length == 0}
+				{#if local_current_account_cart_item.length === 0}
 					<h3 class="h3">No Item Yet!</h3>
 				{/if}
 				{#each local_current_account_cart_item as item}
