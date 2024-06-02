@@ -1,9 +1,9 @@
 <script>
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
-
+	import { Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import { current_account } from "../store.js";
+	import { current_account, current_account_ID } from "../store.js";
 						
 
 	let local_current_account = "";
@@ -13,6 +13,7 @@
 
 	function log_out(){
 		$current_account = "";
+		$current_account_ID = 0;
 	};
 
 </script>
@@ -28,12 +29,15 @@
 		font-size: 16px;
 	}
 
-	#welcome-message {
+	.user-container {
+		gap: 15px;
+		align-items:center;
+		margin-right: 5px;
+		padding-right: 5px;
 		padding-left: 5px;
-		padding-right: 13vw;
 		font-weight: bold;
 		font-size: 17px;
-		justify-content: center;
+		display: flex;
 	}
 
 	#home-icon {
@@ -81,19 +85,24 @@
 				<TabAnchor href="/login" class="text-center">
 					<svelte:fragment slot="lead"><span>&#10070;</span> Login</svelte:fragment>
 				</TabAnchor>
-			{/if}
 				<TabAnchor href="/register" class="text-center">
 					<svelte:fragment slot="lead"><span>&#9997;</span> Register</svelte:fragment>
 				</TabAnchor>
+			{:else}
+				<TabAnchor href="/cart" class="text-center">
+					<svelte:fragment slot="lead"><span>🛒</span> Cart</svelte:fragment>
+				</TabAnchor>
+			{/if}
 		</div>
 		
 		{#if local_current_account}
 			<div id="welcome-container" class="flex items-center">
-				<a href="/user_UI">
-					<p id="welcome-message" class="text-center">
-						<span style="color: red;">&#9733;</span> Welcome, {local_current_account}!
-					</p>
-				</a>
+				<TabAnchor href="/user_UI">
+					<div class="user-container">
+							<Avatar background="bg-primary-500" width="w-8">👍</Avatar>
+							{local_current_account}
+					</div>
+				</TabAnchor>
 			</div>
 			<div id="right-container" class="flex space-x-3 items-center justify-end">
 				<div id="light-switch">

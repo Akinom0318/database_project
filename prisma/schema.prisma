@@ -43,7 +43,7 @@ model order_item {
 
 model orders {
   order_ID   Int          @unique@default(autoincrement())
-  user_ID    Int          @unique
+  user_ID    Int          
   status     Int?         @default(0)
   order_item order_item[]
   User       user         @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "orders_ibfk_1")

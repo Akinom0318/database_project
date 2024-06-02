@@ -4,6 +4,14 @@
 		"src/routes/+page.server.js"
 	],
 	"/admin": [],
+	"/cart": [],
+	"/cart/cart_item": [
+		"src/routes/cart/cart_item/+server.js"
+	],
+	"/cart/order_page": [],
+	"/cart/order_page/paying_info": [
+		"src/routes/cart/order_page/paying_info/+server.js"
+	],
 	"/login": [],
 	"/login/users": [
 		"src/routes/login/users/+server.js"

@@ -7,6 +7,7 @@
 	import { Ratings } from '@skeletonlabs/skeleton';
     import { DataHandler } from '@vincjo/datatables';
 	import AddToCart from './AddToCart.svelte';
+    import { fly } from "svelte/transition";
 
 	let current_product = new Object();
 	let add_to_cart_visible = false;
@@ -41,9 +42,11 @@
 
 </style>
 
-<AddToCart bind:product={current_product} bind:visible={add_to_cart_visible}/>
+{#if add_to_cart_visible}
+	<AddToCart bind:product={current_product} bind:visible={add_to_cart_visible}/>
+{/if}
 
-<div id="product-container" class="overflow-y-auto space-y-4">
+<div id="product-container" class="overflow-y-auto space-y-4" in:fly={{ y: 20 }}>
 	<header class="flex justify-between">
 		<Search {handler} />
 		<RowsPerPage {handler} />

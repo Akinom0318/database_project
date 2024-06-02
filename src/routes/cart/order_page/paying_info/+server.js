@@ -11,13 +11,16 @@ export async function GET() {
 /** @type {import('./$types').RequestHandler} */
 export async function POST(evt) {
     const data = await evt.request.json();
-    await database.update_a_user_db(
 
-        data.local_current_account,
-        data.password_input,
-        data.address_input,
-        data.email_input,
-        data.ISO_birthdate);
+    let user_ID_input = data.local_current_account_ID;
+    let bank_account_input = data.bank_account_input;
+    let bank_num_input = data.bank_number_input;
+    let address_input = data.address_input;
+    
+    await database.create_new_order_db(user_ID_input);
+
+    await database.create_new_paying_db(user_ID_input,bank_account_input,bank_num_input,address_input);
+
 
     return json({ok:true});
 }
@@ -26,7 +29,7 @@ export async function POST(evt) {
 export async function DELETE(evt){
     const data = await evt.request.json();
 
-    await database.delete_a_user_db(data.local_current_account_ID);
+    await database.modify_product_after_order_db(data.local_current_account_ID);
 
     return json({ok:true});
 }
