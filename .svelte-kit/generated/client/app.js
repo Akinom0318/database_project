@@ -20,7 +20,6 @@ export const server_loads = [];
 export const dictionary = {
 		"/": [~2],
 		"/admin": [3],
-<<<<<<< HEAD
 		"/cart": [4],
 		"/cart/order_page": [5],
 		"/login": [6],
@@ -28,15 +27,7 @@ export const dictionary = {
 		"/user_UI": [8],
 		"/user_UI/admin/product": [~9],
 		"/user_UI/admin/transaction": [10],
-		"/user_UI/admin/userList": [11]
-=======
-		"/login": [4],
-		"/register": [5],
-		"/user_UI": [6],
-		"/user_UI/admin/product": [~7],
-		"/user_UI/admin/transaction": [8],
-		"/user_UI/admin/userList": [~9]
->>>>>>> 7688a9a1f5e6a30bee6114b32a2f9c488102e971
+		"/user_UI/admin/userList": [~11]
 	};
 
 export const hooks = {

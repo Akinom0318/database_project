@@ -146,11 +146,13 @@
 			<div id="light-switch">
 				<LightSwitch />
 			</div>
-			<button on:click={log_out}
-				id = "Log_out_button"
-				class="btn btn-sm variant-filled"
-				type="button">Log out
-			</button>
+			<a href="/">
+				<button on:click={log_out}
+					id = "Log_out_button"
+					class="btn btn-sm variant-filled"
+					type="button">Log out
+				</button>
+			</a>
 		</div>
 	</TabGroup>
 {/if}

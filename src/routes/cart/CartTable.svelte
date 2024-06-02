@@ -60,13 +60,14 @@
 		}
 	}
 
+	//TODO
+	//need to prevent from 0 cart items
 	function after_order_button_pressed(){
 		order_button_pressed = false;
 	}
 
 	get_all_items();
 	
-
 </script>
 
 <style>
@@ -120,7 +121,6 @@
 	<ModifyCart bind:product={current_product} bind:visible={modify_visible}/>
 {/if}
 
-
 <!--Out of stock message-->
 {#if out_of_stock_message}
 	<MessageModal bind:visible={out_of_stock_warning} bind:message={out_of_stock_message} />
@@ -165,10 +165,9 @@
 				</td>
 			</tr>
 		</thead>
-
 		<tbody id="content" style="text-align: center;">
 			{#if loading}
-				{#if local_current_account_cart_item.length === 0}
+				{#if local_current_account_cart_item.length == 0}
 					<h3 class="h3">No Item Yet!</h3>
 				{/if}
 				{#each local_current_account_cart_item as item}
