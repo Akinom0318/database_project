@@ -23,6 +23,7 @@ export const options = {
 	},
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	version_hash: "1qjaypg"
 =======
 	version_hash: "atxsdt"
@@ -30,6 +31,9 @@ export const options = {
 =======
 	version_hash: "1qjaypg"
 >>>>>>> c98db386 (complete cart and order feature)
+=======
+	version_hash: "1971w1l"
+>>>>>>> 4e0e879a (fix log out bug and at some comments)
 };
 
 export async function get_hooks() {

@@ -30,15 +30,7 @@ export const dictionary = {
 		"/user_UI": [8],
 		"/user_UI/admin/product": [~9],
 		"/user_UI/admin/transaction": [10],
-		"/user_UI/admin/userList": [~11],
-		"/cart": [4],
-		"/cart/order_page": [5],
-		"/login": [6],
-		"/register": [7],
-		"/user_UI": [8],
-		"/user_UI/admin/product": [~9],
-		"/user_UI/admin/transaction": [10],
-		"/user_UI/admin/userList": [11]
+		"/user_UI/admin/userList": [~11]
 	};
 
 export const hooks = {
