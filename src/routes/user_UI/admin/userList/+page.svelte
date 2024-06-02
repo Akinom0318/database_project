@@ -1,6 +1,9 @@
 <script lang="ts">
     import MessageModal from '$lib/MessageModal.svelte';
     import { current_account } from "../../../../store";
+    import UsersTable from "./adminUsersTable.svelte";
+
+    export let data;
 
     let local_current_account = "";
     current_account.subscribe((value) => {
@@ -16,4 +19,10 @@
 
 </script>
 
-<p>This is a userlist</p>
+<style></style>
+
+<div id="UsersTable-container">
+    <UsersTable data={data.users} />
+</div>
+
+<!-- <p>This is a userlist</p> -->
