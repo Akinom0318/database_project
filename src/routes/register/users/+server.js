@@ -18,7 +18,8 @@ export async function POST(evt) {
         data.password_input,
         data.address_input,
         data.email_input,
-        data.ISO_birthdate);
+        data.ISO_birthdate,
+        data.phone_number_input);
 
     return json({ok:true});
 }

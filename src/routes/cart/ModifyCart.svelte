@@ -2,8 +2,12 @@
     import { fly } from "svelte/transition";
     import { RangeSlider } from '@skeletonlabs/skeleton';
     import { current_account_ID } from "../../store";
+    import { goto } from '$app/navigation';
+
     export let product = Object();
     export let visible = false;
+
+    let each_product_price = product.prices / product.quantity;
 
     let local_current_account_ID = 0
 
@@ -11,32 +15,41 @@
         local_current_account_ID = value;
     });
 
-    let slide_value = 0;
-    let slide_max = 30;
-    let total_price = 0;
+    let slide_value = product.quantity;
+    let slide_max = product.quantity;
 
-    if(slide_max > product.stock){
-        slide_max = product.stock
+    if(slide_max > 100){
+        slide_max = 100;
     }
+
+    let total_price = 0;
 
     function close() {
         visible = false;
     }
 
-    async function add_to_cart_confirm(){
+    function reloadPage() {
+        const thisPage = window.location.pathname;
+
+        console.log('goto ' + thisPage);
+
+        goto('/').then(
+            () => goto(thisPage)
+        );
+    }
+
+    async function modify_cart_confirm(){
         visible = false;
-        if(slide_value < 1){
-            return;
-        }
-        total_price = slide_value * product.selling_price;
+        total_price = slide_value * each_product_price;
         let product_ID = product.product_ID
-        const response = await fetch("product_table_client/cart_item", {
+        const response = await fetch("cart/cart_item", {
                 method: 'POST',
                 body: JSON.stringify({local_current_account_ID, product_ID, slide_value, total_price}),
                 headers: {
             'content-type': 'application/json'
             }
         });
+        reloadPage();
     }
 
 </script>
@@ -95,16 +108,16 @@
                 &times;
             </button>
             <h4 class="h4">Item: {product.product_name}</h4>
-            <h4 class="h4">Price: {product.selling_price}</h4>
+            <h4 class="h4">Current Price: {product.prices}</h4>
             <RangeSlider name="range-slider" bind:value={slide_value} max={slide_max} step={1} ticked>
                 <div class="flex justify-between items-center">
                     <div class="font-bold">Quantity</div>
                     <div class="text-xs">{slide_value} / {slide_max}</div>
                 </div>
             </RangeSlider>
-            <h4 class="h4">Total Price: {product.selling_price * slide_value}</h4>
+            <h4 class="h4">Modified Price: {each_product_price * slide_value}</h4>
             <div class="button">
-                <button on:click={add_to_cart_confirm} type="button" class="btn btn-sm variant-filled-tertiary">
+                <button on:click={modify_cart_confirm} type="button" class="btn btn-sm variant-filled-tertiary">
                     Confirm
                 </button>                
             </div>

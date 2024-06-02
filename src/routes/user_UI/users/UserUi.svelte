@@ -1,7 +1,7 @@
 <script>
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
-    import { current_account } from "../../../store";
+    import { current_account, current_account_ID } from "../../../store";
 
     let email_input = "";
     let password_input = "";
@@ -11,6 +11,8 @@
     let modify_warning = false;
     let mask_password = false;
     let modify_success = false;
+    let delete_warning = false;
+
 
     //return all users
     async function get_all_users(){
@@ -41,6 +43,32 @@
 
     function modify_confirm(){
         modify_warning = true;
+    }
+
+    function delete_confirm(){
+        delete_warning = true;
+    }
+
+    async function delete_confirm_yes(){
+        delete_warning = false;
+        let local_current_account_ID = 0;
+
+        current_account_ID.subscribe((value) => {
+            local_current_account_ID = value;
+        })
+
+        const response = await fetch("user_UI/users",{
+            method: "DELETE",
+            body: JSON.stringify({local_current_account_ID}),
+        });
+
+        $current_account = "";
+        $current_account_ID = 0;
+
+    }
+
+    function delete_confirm_no(){
+        delete_warning = false;
     }
 
     async function modify_confirm_yes(){
@@ -77,13 +105,17 @@
     }
 
     div.button{
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 5%;
     }
 
     h1{
         padding-top: 15px;
         text-align: center;
     }
+
+    
 </style>
 
 {#if modify_warning}
@@ -120,8 +152,28 @@
     </aside>
 {/if}
 
+{#if delete_warning}
+    <aside class="alert variant-ghost-warning" in:fly={{ y: 20 }}>
+        <div class="alert-message">
+            <h1 class="h1" style="text-align: left; padding-top: 0px;" >
+                ⚠️Warning!
+            </h1>
+            <h2 class="h2">Are you sure you want to <b>DELETE THE ACCOUNT</b>?</h2>
+        </div>
+        <div class="alert-actions">
+            <a href="../">
+                <button on:click={delete_confirm_yes} class="btn variant-filled">
+                    Yes
+                </button>                
+            </a>
+            <button on:click={delete_confirm_no} class="btn variant-filled">
+                No
+            </button>
+        </div>
+    </aside>
+{/if}
 
-<h1 class="h1">
+<h1 class="h1" in:fly={{ y: 20 }}>
 	<span class="bg-gradient-to-br from-blue-500 to-cyan-300 bg-clip-text text-transparent box-decoration-clone">
         Modify your account information!
     </span>
@@ -194,6 +246,8 @@
     <button on:click={modify_confirm} type="button" id="modify_button" class="btn variant-filled">
         Modify
     </button>
+
+    <button on:click={delete_confirm} type="button" id="delete_button" class="btn variant-filled-error">
+        DELETE
+    </button>
 </div>
-
-

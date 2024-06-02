@@ -3,7 +3,7 @@
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import MessageModal from '../../lib/MessageModal.svelte';
-    import { current_account } from "../../store";
+    import { current_account, current_account_ID } from "../../store";
 
     //! Admin Account: admin
     let isAdmin = false;
@@ -152,7 +152,7 @@
                 </div>
                 <div class="alert-actions">
                     {#if !isAdmin}
-                        <a href="../">
+                        <a href="/">
                             <button on:click={pressed_login_success}
                                 id = "login_button"
                                 type="button"
