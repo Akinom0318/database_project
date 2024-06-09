@@ -5,6 +5,17 @@
 	import Search from '$lib/product_table/Search.svelte';
 	import ThSort from '$lib/product_table/ThSort.svelte';
 	import { DataHandler } from '@vincjo/datatables';
+	import DeleteUserMessage from './DeleteUserMessage.svelte';
+
+	let deleted_user = new Object();
+	let deleting_visible = false;
+
+	//@ts-ignore
+	function delete_user(user){
+		deleted_user = user;
+		deleting_visible = true;
+		console.log(deleted_user);
+	}
 
 	export let data: any[];
     //Init data handler - SERVER
@@ -30,6 +41,8 @@
 
 </style>
 
+<DeleteUserMessage bind:user={deleted_user} bind:visible={deleting_visible}/>
+
 
 <div id="user-container" class="overflow-y-auto space-y-4">
 	<header class="flex justify-between">
@@ -47,6 +60,9 @@
 				<ThSort {handler} orderBy="email_address">Email Address</ThSort>
 				<ThSort {handler} orderBy="birthdate">Birthdate</ThSort>
 				<ThSort {handler} orderBy="age">age</ThSort>
+				<h3 class="h3" style="text-align: center; padding-top: 12px;">
+					Delete the user
+				</h3>
 			</tr>
 		</thead>
 		<tbody id="content" style="text-align: center;">
@@ -54,22 +70,23 @@
 			<!-- currently the price and discount attribute is not compatible-->
 			<!-- in the above feature will result in some display error-->
 			{#each $rows as row}
-				<tr>
-					<td>{row.user_ID}</td>
-					<td>{row.account}</td>
-					<td>{row.password}</td>
-					<td>{row.enrollment_date}</td>
-					<td>{row.address}</td>
-					<td>{row.email_address}</td>
-					<td>{row.birthdate}</td>
-					<td>{row.age}</td>
-				</tr>
-			{:else}
-				<tr>
-					<p>
-						Users not found!
-					</p>
-				</tr>
+				{#if row.user_ID !== -1}
+					<tr>
+						<td>{row.user_ID}</td>
+						<td>{row.account}</td>
+						<td>{row.password}</td>
+						<td>{row.enrollment_date}</td>
+						<td>{row.address}</td>
+						<td>{row.email_address}</td>
+						<td>{row.birthdate}</td>
+						<td>{row.age}</td>
+						<td>
+							<button on:click={() => delete_user(row)} type="button" class="btn btn-sm variant-filled-tertiary">
+								Delete
+							</button>
+						</td>
+					</tr>
+				{/if}
 			{/each}
 		</tbody>
 	</table>
@@ -78,3 +95,4 @@
 		<Pagination {handler} />
 	</footer>
 </div>
+

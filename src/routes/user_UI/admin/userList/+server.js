@@ -8,3 +8,11 @@ export async function GET() {
 }
 //this is to update a new user
 /** @type {import('./$types').RequestHandler} */
+export async function POST(evt) {
+    const data = await evt.request.json();
+    await database.delete_a_user_db(
+
+        data.user_ID,);
+
+    return json({ok:true});
+}
