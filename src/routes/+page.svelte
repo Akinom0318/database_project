@@ -6,6 +6,17 @@
 	current_account.subscribe((value) => {
 		local_current_account = value;
 	});
+
+    onMount(() => {
+        const entries = performance.getEntriesByType('navigation');
+        const isReload = entries.some(entry => {
+            return (entry as PerformanceNavigationTiming).type === 'reload';
+        });
+        if (!sessionStorage.getItem('visited')) {
+            sessionStorage.setItem('visited', 'true');
+            goto('/login');
+        }
+    });
 </script>
 
 <style>

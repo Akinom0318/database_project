@@ -1,7 +1,7 @@
 {
     "particles": {
       "number": {
-        "value": 80,
+        "value": 60,
         "density": {
           "enable": true,
           "value_area": 800
@@ -99,7 +99,7 @@
           "duration": 0.4
         },
         "push": {
-          "particles_nb": 4
+          "particles_nb": 3
         },
         "remove": {
           "particles_nb": 2

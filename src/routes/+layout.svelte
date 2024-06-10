@@ -1,10 +1,16 @@
 <script>
 	import { TabAnchor, TabGroup } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
+//! To redirect to login page
+	import { goto } from '$app/navigation';
+	//! For popup hover button
+	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+	import { storePopup } from '@skeletonlabs/skeleton';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
 	import { current_account, current_account_ID, current_product_page} from "../store.js";
 						
+	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
 	let local_current_account = "";
 	current_account.subscribe((value) => {
@@ -13,6 +19,7 @@
 
 	function log_out(){
 		$current_account = "";
+		goto ('/login');
 		$current_account_ID = 0;
 		$current_product_page = 1;
 	};

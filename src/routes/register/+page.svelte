@@ -51,6 +51,11 @@
             showModal("Phone Number cannot contain whitespace.");
             return false;
         }
+        //! PhoneNumber First two char is zero
+        if(phone_number_input.charAt(0) == "0" && phone_number_input.charAt(1) == "0"){
+            showModal("Phone Number cannot start with 00.");
+            return false;
+        }
         return true;
     }
 
@@ -107,20 +112,20 @@
         if(!containsWhiteSpace()) { return;}
         if(!email_input){ return; }
         //! Check email format
-        const email_format_check = isValidEmail(email_input); 
+        const email_format_check = isValidEmail(email_input);
         if(!email_format_check){ 
             showModal("Email format is invalid.");
             return;
         }
 
         if(!account_input){ return; }
-        else if(account_input.length < 1 || account_input.length > 50){
+        else if(account_input.length < 1 || account_input.length > 30){
             showModal("Account length needs to between 1 and 50 characters.");
             return;
         }
 
         if(!password_input){ return; }
-        else if(password_input.length < 4 || password_input.length > 55) { 
+        else if(password_input.length < 4 || password_input.length > 35) { 
             showModal("Password length needs to between 4 and 55 characters.");
             return;
         }
@@ -190,6 +195,14 @@
         margin-top: 5px;
         width: 100%;
     }
+
+    .hoverPop {
+		display: flex;
+		position: fixed; /* blur position */
+		padding-top: 15px;
+        margin-top: 40%;
+		backdrop-filter: blur(15px);
+	}
     
 </style>
 
@@ -199,7 +212,7 @@
 <!-- this part is warning that will show if the account is existed. -->
 <div id="success-warning-message">
     {#if warning_visible}
-        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+        <aside class="alert variant-ghost hoverPop" in:fly={{ y: 20 }}>
             <div class="alert-message">
                 <h3 class="h3">WARNING!</h3>
                 <p>Account has been registered!</p>
@@ -213,7 +226,7 @@
             </div>
         </aside>
     {:else if register_success}
-        <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
+        <aside class="alert variant-ghost hoverPop" in:fly={{ y: 20 }}>
             <div class="alert-message">
                 <h3 class="h3">Congradulation!</h3>
                 <p>Account has been registered successfully!</p>
@@ -240,9 +253,8 @@
             <td><input 
                 bind:value={email_input}
                 class="input"
-                type="email"
+                type="text"
                 id = "Email"
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$"
                 placeholder="Enter your Email..." required/>
             </td>
         </tr>

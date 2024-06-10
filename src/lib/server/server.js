@@ -378,6 +378,51 @@ export async function add_to_cart_db(user_ID,product_ID_input,quantity_input,pri
     })
   }
 }
+
+// @ts-ignore
+//TODO delete products
+export async function deleteProductDB(product_ID) { 
+  await prisma.product.delete({
+    where: {
+      product_ID: Number(product_ID)
+    }
+  })
+}
+
+//@ts-ignore
+//TODO insert products and update products
+export async function insertUpdateProductDB(ProductList) { 
+  await prisma.product.upsert({
+    where: {
+      product_ID: Number(ProductList.product_ID)
+    },
+    update: {
+      product_name: ProductList.product_name,
+      discount: Number(ProductList.discount),
+      original_price: Number(ProductList.original_price),
+      selling_price: Number(ProductList.selling_price),
+      tags: ProductList.tags,
+      stock: Number(ProductList.stock),
+      sales: Number(ProductList.sales),
+      likes: Number(ProductList.likes),
+      avg_score: Number(ProductList.avg_score),
+      num_of_comment: Number(ProductList.num_of_comment),
+    },
+    create: {
+      product_name: ProductList.product_name,
+      discount: Number(ProductList.discount),
+      original_price: Number(ProductList.original_price),
+      selling_price: Number(ProductList.selling_price),
+      tags: ProductList.tags,
+      stock: Number(ProductList.stock),
+      sales: Number(ProductList.sales),
+      likes: Number(ProductList.likes),
+      avg_score: Number(ProductList.avg_score),
+      num_of_comment: Number(ProductList.num_of_comment),
+    }
+  })
+}
+
 //TODO update products
 
 
@@ -440,17 +485,6 @@ export async function modify_product_after_order_db(user_ID_input){
 
 }
 
-
-// different from previous one,it will delete everything
-// that user gives review
-export async function delete_cart_items_db(user_ID_input){
-  await prisma.cart_item.deleteMany({
-    where:{
-      cart_ID:user_ID_input
-    }
-  })
-}
-
 export async function delete_liking_item_db(user_ID_input, product_ID_input){
   await prisma.liking_list.delete({
     where:{
@@ -462,20 +496,3 @@ export async function delete_liking_item_db(user_ID_input, product_ID_input){
   })
 }
 
-
-export async function modify_product_after_order_db(user_ID_input){
-  let user_cart_items = await get_certain_user_cart_items_db(user_ID_input);
-
-  for(const item of user_cart_items){
-    let current_product = await get_certain_product_db(item.product_ID)
-    await prisma.product.update({
-      where:{
-        product_ID: current_product.product_ID
-      },
-      data:{
-        stock: current_product.stock - item.quantity,
-        sales: current_product.sales + item.quantity
-      }
-    })
-  }
-}

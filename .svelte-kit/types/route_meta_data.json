@@ -1,4 +1,7 @@
 {
+	"/": [
+		"src/routes/+page.js",
+		"src/routes/+page.server.js"
 	"/": [],
 	"/admin": [],
 	"/cart": [],
@@ -46,6 +49,9 @@
 	"/user_UI/admin/product": [
 		"src/routes/user_UI/admin/product/+page.server.js",
 		"src/routes/user_UI/admin/product/+server.js"
+	],
+	"/user_UI/admin/product/[modifyProduct]": [
+		"src/routes/user_UI/admin/product/[modifyProduct]/+server.js"
 	],
 	"/user_UI/admin/transaction": [
 		"src/routes/user_UI/admin/transaction/+server.js"

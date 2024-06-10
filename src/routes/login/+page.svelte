@@ -119,6 +119,10 @@
         margin-top: 15px;
     }
 
+    label {
+        margin-right: 10px;
+    }
+
     #login-container {
         padding: 10px;
         display: flex;
@@ -138,6 +142,14 @@
         width: 100%;
     }
 
+    .hoverPop {
+		display: flex;
+		position: fixed; /* blur position */
+		padding-top: 15px;
+        margin-top: 35%;
+		backdrop-filter: blur(15px);
+	}
+
 </style>
 
 <!-- Message Box -->
@@ -145,7 +157,7 @@
 
 <div id="login-message">
     {#if login}
-        <div>
+        <div class="hoverPop">
             <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
                 <div class="alert-message">
                     <h3 class="h3">Log in successful!</h3>
@@ -172,7 +184,7 @@
             </aside>
         </div>
     {:else if !account_existence && pressed_login}
-        <div>
+        <div class="hoverPop">
             <aside class="alert variant-ghost" in:fly={{ y: 20 }}>
                 <div class="alert-message">
                     <h3 class="h3">The account does not exist!</h3>
