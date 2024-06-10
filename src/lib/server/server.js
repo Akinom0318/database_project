@@ -204,23 +204,6 @@ export async function create_new_paying_db(user_ID_input,bank_account_input,bank
       payment_ID: current_paying_info.payment_ID
     }
   })
-
-  let current_user_account_ID = 0;
-
-  const allUsers = await get_users_db();
-  for(const user of allUsers){
-    if(user.account === account_input){
-      current_user_account_ID = user.user_ID;
-      break;
-    }
-  }
-
-  await prisma.user_phone.create({
-    data:{
-      user_ID: current_user_account_ID,
-      phone_number: phone_number_input
-    }
-  })
 }
 
 
@@ -309,6 +292,7 @@ export async function update_product_review_db(product_ID_input,review){
   let current_product = await get_certain_product_db(product_ID_input);
 
   let final_review = (current_product.avg_score * current_product.num_of_comment + review) / (current_product.num_of_comment + 1);
+  final_review = Math.round(final_review * 2) / 2;
 
   await prisma.product.update({
     where:{
@@ -418,8 +402,6 @@ export async function insertUpdateProductDB(ProductList) {
     }
   })
 }
-
-//TODO update products
 
 
 //delete a user account
