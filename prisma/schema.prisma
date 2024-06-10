@@ -8,11 +8,11 @@ datasource db {
 }
 
 model cart_item {
-  cart_ID    Int 
+  cart_ID    Int
   product_ID Int
   quantity   Int
   prices     Decimal? @db.Decimal(8, 2)
-  User       user     @relation(fields: [cart_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_1")
+  user       user     @relation(fields: [cart_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_1")
   product    product  @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "cart_item_ibfk_2")
 
   @@id([cart_ID, product_ID])
@@ -22,7 +22,7 @@ model cart_item {
 model liking_list {
   user_ID    Int
   product_ID Int
-  User       user    @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_1")
+  user       user    @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_1")
   product    product @relation(fields: [product_ID], references: [product_ID], onDelete: Cascade, onUpdate: NoAction, map: "liking_list_ibfk_2")
 
   @@id([user_ID, product_ID])
@@ -42,11 +42,11 @@ model order_item {
 }
 
 model orders {
-  order_ID   Int          @unique@default(autoincrement())
-  user_ID    Int          @unique
+  order_ID   Int          @unique(map: "order_ID") @default(autoincrement())
+  user_ID    Int
   status     Int?         @default(0)
   order_item order_item[]
-  User       user         @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "orders_ibfk_1")
+  user       user         @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "orders_ibfk_1")
   paying     paying[]
 
   @@id([order_ID, user_ID])
@@ -93,17 +93,9 @@ model product {
 model search_history {
   user_ID Int
   keyword String @db.VarChar(80)
-  User    user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "search_history_ibfk_1")
+  user    user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "search_history_ibfk_1")
 
   @@id([user_ID, keyword])
-}
-
-model user_phone {
-  user_ID      Int
-  phone_number String @db.VarChar(18)
-  User         user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "user_phone_ibfk_1")
-
-  @@id([user_ID, phone_number])
 }
 
 model user {
@@ -120,4 +112,12 @@ model user {
   orders          orders[]
   search_history  search_history[]
   user_phone      user_phone[]
+}
+
+model user_phone {
+  user_ID      Int
+  phone_number String @db.VarChar(18)
+  user         user   @relation(fields: [user_ID], references: [user_ID], onDelete: Cascade, onUpdate: NoAction, map: "user_phone_ibfk_1")
+
+  @@id([user_ID, phone_number])
 }

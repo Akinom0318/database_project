@@ -6,17 +6,11 @@ export async function GET() {
 
 	return json(allProducts);
 }
-//this is to update a new user
+//this is to delete a new user
 /** @type {import('./$types').RequestHandler} */
-// export async function POST(evt) {
-//     const data = await evt.request.json();
-//     await database.update_a_user_db(
+export async function POST(evt) {
+    const data = await evt.request.json();
+    await database.deleteProductDB(data.product_ID);
 
-//         data.local_current_account,
-//         data.password_input,
-//         data.address_input,
-//         data.email_input,
-//         data.ISO_birthdate);
-
-//     return json({ok:true});
-// }
+    return json({ok:true});
+}

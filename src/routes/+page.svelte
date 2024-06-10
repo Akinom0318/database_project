@@ -3,12 +3,26 @@
     import { current_account } from "../store.js";
     import ProductTable from "./product_table_client/ProductTable.svelte";
 
+    import { goto } from '$app/navigation';
+    import { onMount } from 'svelte';
+
     export let data;
 
     let local_current_account = "";
 	current_account.subscribe((value) => {
 		local_current_account = value;
 	});
+
+    onMount(() => {
+        const entries = performance.getEntriesByType('navigation');
+        const isReload = entries.some(entry => {
+            return (entry as PerformanceNavigationTiming).type === 'reload';
+        });
+        if (!sessionStorage.getItem('visited')) {
+            sessionStorage.setItem('visited', 'true');
+            goto('/login');
+        }
+    });
 </script>
 
 <style>

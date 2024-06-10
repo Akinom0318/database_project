@@ -43,9 +43,7 @@ declare module '$env/static/private' {
 	export const CONDA_PROMPT_MODIFIER: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_3364: string;
-	export const FPS_BROWSER_APP_PROFILE_STRING: string;
-	export const FPS_BROWSER_USER_PROFILE_STRING: string;
+	export const EFC_13732: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
@@ -81,7 +79,6 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
-	export const NVIDIAWHITELISTED: string;
 	export const OneDrive: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
@@ -109,7 +106,6 @@ declare module '$env/static/private' {
 	export const PUBLIC: string;
 	export const RlsSvcPort: string;
 	export const SESSIONNAME: string;
-	export const SHIM_MCCOMPAT: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -176,9 +172,7 @@ declare module '$env/dynamic/private' {
 		CONDA_PROMPT_MODIFIER: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_3364: string;
-		FPS_BROWSER_APP_PROFILE_STRING: string;
-		FPS_BROWSER_USER_PROFILE_STRING: string;
+		EFC_13732: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -214,7 +208,6 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
-		NVIDIAWHITELISTED: string;
 		OneDrive: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
@@ -242,7 +235,6 @@ declare module '$env/dynamic/private' {
 		PUBLIC: string;
 		RlsSvcPort: string;
 		SESSIONNAME: string;
-		SHIM_MCCOMPAT: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;

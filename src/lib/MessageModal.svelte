@@ -3,20 +3,20 @@
     import { fly } from "svelte/transition";
     export let message = '';
     export let visible = false;
+    export let formInsertVisable = false;
+    export let formUpdateVisable = false;
+    export let formType = 0;
 
     function close() {
         visible = false;
+        console.log("clos", formType);
+        if(formType == 0){
+            formInsertVisable = true;
+        }else if(formType == 1){
+            formUpdateVisable = true;
+        }
     }
 </script>
-
-{#if visible}
-    <div class="modal" in:fly={{ y: 20 }}>
-        <div class="modal-content">
-            <button class="close" on:click={close}>&times;</button>
-            <p>{message}</p>
-        </div>
-    </div>
-{/if}
 
 <style>
     .modal {
@@ -40,7 +40,8 @@
         max-width: 400px;
         width: 90%;
         text-align: center;
-        color: rgb(255, 254, 254)
+        color: rgb(255, 254, 254);
+        font-size: 1.1rem;
     }
 
     .close {
@@ -55,8 +56,17 @@
 
     .close:hover,
     .close:focus {
-        color: rgb(218, 182, 182);
+        color: rgba(255, 255, 255, 0.89);
         text-decoration: none;
         cursor: pointer;
     }
 </style>
+
+{#if visible}
+    <div class="modal" in:fly={{ y: 20 }}>
+        <div class="modal-content">
+            <button class="close" on:click={close}>&times;</button>
+            <p>{message}</p>
+        </div>
+    </div>
+{/if}

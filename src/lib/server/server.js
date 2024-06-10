@@ -94,4 +94,48 @@ export async function add_to_card_db(user_ID,product_ID_input,quantity_input,pri
     })
   }
 }
-//TODO update products
+
+// @ts-ignore
+//TODO delete products
+export async function deleteProductDB(product_ID) { 
+  await prisma.product.delete({
+    where: {
+      product_ID: Number(product_ID)
+    }
+  })
+}
+
+//@ts-ignore
+//TODO insert products and update products
+export async function insertUpdateProductDB(ProductList) { 
+  await prisma.product.upsert({
+    where: {
+      product_ID: Number(ProductList.product_ID)
+    },
+    update: {
+      product_name: ProductList.product_name,
+      discount: Number(ProductList.discount),
+      original_price: Number(ProductList.original_price),
+      selling_price: Number(ProductList.selling_price),
+      tags: ProductList.tags,
+      stock: Number(ProductList.stock),
+      sales: Number(ProductList.sales),
+      likes: Number(ProductList.likes),
+      avg_score: Number(ProductList.avg_score),
+      num_of_comment: Number(ProductList.num_of_comment),
+    },
+    create: {
+      product_name: ProductList.product_name,
+      discount: Number(ProductList.discount),
+      original_price: Number(ProductList.original_price),
+      selling_price: Number(ProductList.selling_price),
+      tags: ProductList.tags,
+      stock: Number(ProductList.stock),
+      sales: Number(ProductList.sales),
+      likes: Number(ProductList.likes),
+      avg_score: Number(ProductList.avg_score),
+      num_of_comment: Number(ProductList.num_of_comment),
+    }
+  })
+}
+
