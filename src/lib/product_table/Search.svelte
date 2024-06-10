@@ -25,12 +25,13 @@
 	placeholder="Search..."
 	bind:value={value}
 	list="history"
-	on:input={() => {if(value === "") handler.search(value)}}
+	on:input={() => {if(value === ""){ handler.search(value)
+						reloadPage();}
+	}}
 	/>
 	<button type="button" class="btn btn-sm variant-filled-secondary" on:click={() => {
 		handler.search(value)
 		$current_keyword = value
-		reloadPage();
 	}}>
 		Search
 	</button>
