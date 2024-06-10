@@ -33,10 +33,8 @@
                 local_transaction.push(transaction);
             }
         }
-
 		loading = true;
-        console.log(local_transaction);
-        return all_cart_items_object;
+        return local_transaction;
     }
 
     onMount(() => {

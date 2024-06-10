@@ -7,6 +7,7 @@
     import { browser } from '$app/environment';
 	import ModifyCart from "./ModifyCart.svelte";
 	import MessageModal from "$lib/MessageModal.svelte";
+	import { onMount } from "svelte";
 
 	let loading = false;
 	let total_price = 0;
@@ -49,6 +50,9 @@
 	}
 
 	function check_order_valid(){
+		if(local_current_account_cart_item.length < 1){
+			return;
+		}
 		let out_of_stock = false;
 		out_of_stock_message = "Sorry,\n";
 		for(const item of local_current_account_cart_item){
@@ -70,7 +74,9 @@
 		order_button_pressed = false;
 	}
 
-	get_all_items();
+	onMount(() => {
+		get_all_items();
+	})
 	
 </script>
 

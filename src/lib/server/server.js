@@ -1,5 +1,4 @@
 //@ts-nocheck
-//@ts-nocheck
 
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
@@ -266,8 +265,6 @@ export async function create_liking_item_db(user_ID_input, product_ID_input){
   })
 }
 
-
-
 export async function create_new_keyword(user_ID_input,keyword_input){
   await prisma.search_history.create({
     data:{
@@ -346,7 +343,6 @@ export async function check_cart_item_db(user_ID,product_ID_input){
     }
   })
 }
-
 
 //update or create cart item
 export async function add_to_cart_db(user_ID,product_ID_input,quantity_input,price_input){
