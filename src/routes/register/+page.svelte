@@ -25,7 +25,7 @@
     }
 
     //! Check if input has whitespace
-    function containsWhiteSpace() {
+     function containsWhiteSpace() {
         const whiteSpaceEmail = email_input.includes(" ");
         if(whiteSpaceEmail) {
             showModal("Email cannot contain whitespace.");

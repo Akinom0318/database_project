@@ -1,5 +1,4 @@
-
-/** @type {import('./$types').PageLoad} */
+//@ts-nocheck
 export async function load({ data }) {
     return data;
 }

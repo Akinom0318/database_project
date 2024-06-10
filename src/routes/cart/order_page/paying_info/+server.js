@@ -21,15 +21,8 @@ export async function POST(evt) {
 
     await database.create_new_paying_db(user_ID_input,bank_account_input,bank_num_input,address_input);
 
-
-    return json({ok:true});
-}
-
-/** @type {import('./$types').RequestHandler} */
-export async function DELETE(evt){
-    const data = await evt.request.json();
-
     await database.modify_product_after_order_db(data.local_current_account_ID);
+
 
     return json({ok:true});
 }

@@ -1,9 +1,6 @@
-<script lang="ts">
+<script>
     import { fly } from "svelte/transition";
     import { current_account } from "../store.js";
-    import ProductTable from "./product_table_client/ProductTable.svelte";
-
-    export let data;
 
     let local_current_account = "";
 	current_account.subscribe((value) => {
@@ -12,9 +9,6 @@
 </script>
 
 <style>
-    #ProductTable-container {
-        padding-top: 15px;
-    }
 
     .login-detection{
         text-align: center;
@@ -32,11 +26,22 @@
 
 <!-- <p in:fly={{ y: 20 }} >Home page!</p> -->
 {#if local_current_account}
-    {#if local_current_account != "admin"}
-        <div id="ProductTable-container">
-            <ProductTable data={data.products} />
+    <section class="card w-full">
+        <div class="p-4 space-y-4">
+            <div class="placeholder" />
+            <div class="grid grid-cols-3 gap-8">
+                <div class="placeholder" />
+                <div class="placeholder" />
+                <div class="placeholder" />
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+                <div class="placeholder" />
+                <div class="placeholder" />
+                <div class="placeholder" />
+                <div class="placeholder" />
+            </div>
         </div>
-    {/if}
+    </section>
 {:else}
     <div class="login-detection">
         <aside class="alert variant-ghost-tertiary" in:fly={{ y: 20 }}>

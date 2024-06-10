@@ -1,7 +1,10 @@
 <script>
+	//@ts-nocheck
     import { fly } from "svelte/transition";
     import { current_account_ID } from "../../store";
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
+	import { goto } from '$app/navigation';
+    import { browser } from '$app/environment';
 	import ModifyCart from "./ModifyCart.svelte";
 	import MessageModal from "$lib/MessageModal.svelte";
 
@@ -13,12 +16,17 @@
 	let current_product = new Object;
 	let modify_visible = false;
 	let out_of_stock_warning = false;
-	let out_of_stock_message = "Sorry,\n";
 	let order_button_pressed = false;
+	let out_of_stock_message = "Sorry,\n";
+
 
     current_account_ID.subscribe((value) => {
         local_current_account_ID = value;
     });
+
+    if(!local_current_account_ID && browser){
+        goto('/');
+    }
 
     async function get_all_items(){
         const response = await fetch("cart/cart_item");
@@ -27,7 +35,7 @@
 		total_quantity = 0;
 		for(const item of all_cart_items_object){
 			if(item.cart_ID === local_current_account_ID){
-				total_price += Number(item.prices);
+				total_price += Number(item.prices) * item.quantity;
 				total_quantity += item.quantity;
 				local_current_account_cart_item.push(item)
 			}
@@ -35,22 +43,18 @@
 		loading = true;
     }
 
-	//@ts-ignore
 	async function modify_cart_item(item){
 		current_product = item;
 		modify_visible = true;
 	}
 
-	//@ts-ignore
 	function check_order_valid(){
 		let out_of_stock = false;
-		//check order is under stock
-		//this is quite hard to trigger and debug
-		//I have tried to debug it, but it's required at least two people opperating the website --Akinom
+		out_of_stock_message = "Sorry,\n";
 		for(const item of local_current_account_cart_item){
 			if(item.quantity > item.stock){
 				out_of_stock = true;
-				out_of_stock_message = out_of_stock_message + item.product_name + "is only" + item.product_stock + "left\n";
+				out_of_stock_message = out_of_stock_message + item.product_name + "is only " + item.stock + " left\n";
 			}
 		}
 		if(out_of_stock){
@@ -165,10 +169,9 @@
 				</td>
 			</tr>
 		</thead>
-
 		<tbody id="content" style="text-align: center;">
 			{#if loading}
-				{#if local_current_account_cart_item.length === 0}
+				{#if local_current_account_cart_item.length == 0}
 					<h3 class="h3">No Item Yet!</h3>
 				{/if}
 				{#each local_current_account_cart_item as item}

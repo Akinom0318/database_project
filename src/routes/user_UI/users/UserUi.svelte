@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import { current_account, current_account_ID } from "../../../store";
+    import { isValidEmail } from '../../register/checkFormat';
+    import MessageModal from '$lib/MessageModal.svelte';
 
     let email_input = "";
     let password_input = "";
@@ -12,7 +14,56 @@
     let mask_password = false;
     let modify_success = false;
     let delete_warning = false;
+    let input_valid = false
 
+    let modalMessage = '';
+    let modalVisible = false;
+    function showModal(message: string) {
+        modalMessage = message;
+        modalVisible = true;
+    }
+     function containsWhiteSpace() {
+        const whiteSpaceEmail = email_input.includes(" ");
+        if(whiteSpaceEmail) {
+            showModal("Email cannot contain whitespace.");
+            return false;
+        }
+        const whiteSpacePassword = password_input.includes(" ");
+        if(whiteSpacePassword) {
+            showModal("Password cannot contain whitespace.");
+            return false;
+        }
+        const whiteSpaceAddress = address_input.includes(" ");
+        if(whiteSpaceAddress) {
+            showModal("Address cannot contain whitespace.");
+            return false;
+        }
+        return true;
+    }
+     async function check_valid(){
+        console.log("Checking Validity...");
+        //! Check if input contains whitespace
+        if(!containsWhiteSpace()) { return;}
+        if(!email_input){ return; }
+        //! Check email format
+        const email_format_check = isValidEmail(email_input); 
+        if(!email_format_check){ 
+            showModal("Email format is invalid.");
+            return;
+        }
+
+
+        if(!password_input){ return; }
+        else if(password_input.length < 4 || password_input.length > 55) { 
+            showModal("Password length needs to between 4 and 55 characters.");
+            return;
+        }
+
+        //TODO Address validation and correctness
+        if(!address_input){ return; }
+
+        input_valid = true;
+    }
 
     //return all users
     async function get_all_users(){
@@ -42,7 +93,10 @@
     });
 
     function modify_confirm(){
-        modify_warning = true;
+        check_valid()
+        if(input_valid){
+            modify_warning = true;
+        }
     }
 
     function delete_confirm(){
@@ -137,6 +191,8 @@
     </aside>
 {/if}
 
+<MessageModal bind:visible={modalVisible} bind:message={modalMessage} />
+
 {#if modify_success}
     <aside class="alert variant-ghost-success" in:fly={{ y: 20 }}>
         <div class="alert-message">
@@ -179,75 +235,77 @@
     </span>
 </h1>
 
-<table class ="table-comfortable" >
-    <tr in:fly={{ y: 20 }}>
-        <td ><label id="label-Email" for="Email">Email</label></td>
-        <td><input 
-            bind:value={email_input}
-            class="input"
-            type="email"
-            id = "Email"
-            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$"
-            placeholder="Enter your Email..."/>
-        </td>
-    </tr>
-    <tr in:fly={{ y: 20 }}>
-        <td><label id="label-pwd" for="Password">Password</td>
-        <td>
-            {#if mask_password === true}
-            <input
-                bind:value={password_input}
+<form>
+    <table class ="table-comfortable" >
+        <tr in:fly={{ y: 20 }}>
+            <td ><label id="label-Email" for="Email">Email</label></td>
+            <td><input 
+                bind:value={email_input}
                 class="input"
-                type = "text"
-                minlength="4"
-                maxlength="55"
-                id = "Password"
-                placeholder="Enter your Password..."/>
-            {:else}
+                type="email"
+                id = "Email"
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$"
+                placeholder="Enter your Email..."/>
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-pwd" for="Password">Password</td>
+            <td>
+                {#if mask_password === true}
                 <input
                     bind:value={password_input}
                     class="input"
-                    type = "password"
-                    id = "Password"
+                    type = "text"
                     minlength="4"
                     maxlength="55"
+                    id = "Password"
                     placeholder="Enter your Password..."/>
-            {/if}
-        </td>
-        <td class="toggle-vis">
-            <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
-                visibility
-            </SlideToggle>
-        </td>
-    </tr>
-    <tr in:fly={{ y: 20 }}>
-        <td><label id="label-address" for="Address">Address</label></td>
-        <td><input
-            bind:value={address_input}
-            class="input"
-            type="text"
-            id = "Address"
-            placeholder="Enter your Address..."/>
-        </td>
-    </tr>
-    <tr in:fly={{ y: 20 }}>
-        <td><label id="label-BD" for="Birth_Date">Birth Date (ex:2004/03/18)</label></td>
-        <td><input
-            bind:value={birthdate_input}
-            class="input"
-            type="date"
-            id = "Birth_Date"
-            placeholder="Enter your birth date..."/>
-        </td>
-    </tr>
-</table>
+                {:else}
+                    <input
+                        bind:value={password_input}
+                        class="input"
+                        type = "password"
+                        id = "Password"
+                        minlength="4"
+                        maxlength="55"
+                        placeholder="Enter your Password..."/>
+                {/if}
+            </td>
+            <td class="toggle-vis">
+                <SlideToggle name="slider-label" bind:checked={mask_password} size = "sm" background = "bg-surface-300 dark:bg-surface-900" active = "bg-surface-400 dark:bg-surface-700">
+                    visibility
+                </SlideToggle>
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-address" for="Address">Address</label></td>
+            <td><input
+                bind:value={address_input}
+                class="input"
+                type="text"
+                id = "Address"
+                placeholder="Enter your Address..."/>
+            </td>
+        </tr>
+        <tr in:fly={{ y: 20 }}>
+            <td><label id="label-BD" for="Birth_Date">Birth Date (ex:2004/03/18)</label></td>
+            <td><input
+                bind:value={birthdate_input}
+                class="input"
+                type="date"
+                id = "Birth_Date"
+                placeholder="Enter your birth date..."/>
+            </td>
+        </tr>
+    </table>
 
-<div class="button">
-    <button on:click={modify_confirm} type="button" id="modify_button" class="btn variant-filled">
-        Modify
-    </button>
+    <div class="button">
+        <button on:click={modify_confirm} type="button" id="modify_button" class="btn variant-filled">
+            Modify
+        </button>
 
-    <button on:click={delete_confirm} type="button" id="delete_button" class="btn variant-filled-error">
-        DELETE
-    </button>
-</div>
+        <button on:click={delete_confirm} type="button" id="delete_button" class="btn variant-filled-error">
+            DELETE
+        </button>
+    </div>
+</form>

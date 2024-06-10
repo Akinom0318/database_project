@@ -1,7 +1,5 @@
-// @ts-nocheck
 import { get_products_db } from '$lib/server/server';
 
-/** */
 export async function load() {
     const products = await get_products_db();
     return {
