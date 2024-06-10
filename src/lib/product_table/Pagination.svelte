@@ -1,7 +1,16 @@
 <script lang="ts">
 	import type { DataHandler } from '@vincjo/datatables';
+	import { current_product_page } from '../../store';
 	export let handler: DataHandler;
+
+	let local_current_product_page = 1;
+
 	const pageNumber = handler.getPageNumber();
+
+	pageNumber.subscribe((value) => {
+		local_current_product_page = value;
+	})
+
 	const pageCount = handler.getPageCount();
 	const pages = handler.getPages({ ellipsis: true });
 </script>
@@ -12,7 +21,9 @@
 		type="button"
 		class="hover:variant-soft-primary"
 		class:disabled={$pageNumber === 1}
-		on:click={() => handler.setPage('previous')}
+		on:click={() => {handler.setPage('previous');
+		$current_product_page = local_current_product_page;
+		}}
 	>
 		←
 	</button>
@@ -22,7 +33,9 @@
 			class="hover:variant-soft-primary"
 			class:active={$pageNumber === page}
 			class:ellipse={page === null}
-			on:click={() => handler.setPage(page)}
+			on:click={() => {handler.setPage(page);
+			$current_product_page = local_current_product_page;
+			}}
 		>
 			{page ?? '...'}
 		</button>
@@ -31,7 +44,9 @@
 		type="button"
 		class="hover:variant-soft-primary"
 		class:disabled={$pageNumber === $pageCount}
-		on:click={() => handler.setPage('next')}
+		on:click={() => {handler.setPage('next');
+		$current_product_page = local_current_product_page;
+		}}
 	>
 		→
 	</button>

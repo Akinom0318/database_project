@@ -164,7 +164,7 @@
                 </div>
                 <div class="alert-actions">
                     {#if !isAdmin}
-                        <a href="../">
+                        <a href="/">
                             <button on:click={pressed_login_success}
                                 id = "login_button"
                                 type="button"

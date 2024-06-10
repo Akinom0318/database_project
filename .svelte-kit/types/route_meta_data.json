@@ -2,17 +2,48 @@
 	"/": [
 		"src/routes/+page.js",
 		"src/routes/+page.server.js"
+	"/": [],
+	"/admin": [],
+	"/cart": [],
+	"/cart/cart_item": [
+		"src/routes/cart/cart_item/+server.js"
+	],
+	"/cart/order_page": [],
+	"/cart/order_page/feed_back": [],
+	"/cart/order_page/feed_back/feed_back_info": [
+		"src/routes/cart/order_page/feed_back/feed_back_info/+server.js"
+	],
+	"/cart/order_page/paying_info": [
+		"src/routes/cart/order_page/paying_info/+server.js"
+	],
+	"/liking_list": [],
+	"/liking_list/liking_item": [
+		"src/routes/liking_list/liking_item/+server.js"
 	],
 	"/login": [],
 	"/login/users": [
 		"src/routes/login/users/+server.js"
 	],
-	"/product_table_client/cart_item": [
-		"src/routes/product_table_client/cart_item/+server.js"
+	"/product_table": [
+		"src/routes/product_table/+page.js",
+		"src/routes/product_table/+page.server.js"
+	],
+	"/product_table/cart_item": [
+		"src/routes/product_table/cart_item/+server.js"
+	],
+	"/product_table/keyword": [
+		"src/routes/product_table/keyword/+server.js"
+	],
+	"/product_table/liking_product": [
+		"src/routes/product_table/liking_product/+server.js"
 	],
 	"/register": [],
 	"/register/users": [
 		"src/routes/register/users/+server.js"
+	],
+	"/transaction": [],
+	"/transaction/user_transaction": [
+		"src/routes/transaction/user_transaction/+server.js"
 	],
 	"/user_UI": [],
 	"/user_UI/admin/product": [
@@ -26,6 +57,7 @@
 		"src/routes/user_UI/admin/transaction/+server.js"
 	],
 	"/user_UI/admin/userList": [
+		"src/routes/user_UI/admin/userList/+page.server.js",
 		"src/routes/user_UI/admin/userList/+server.js"
 	],
 	"/user_UI/users": [

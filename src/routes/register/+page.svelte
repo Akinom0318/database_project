@@ -25,7 +25,7 @@
     }
 
     //! Check if input has whitespace
-    function containsWhiteSpace() {
+     function containsWhiteSpace() {
         const whiteSpaceEmail = email_input.includes(" ");
         if(whiteSpaceEmail) {
             showModal("Email cannot contain whitespace.");
@@ -149,7 +149,7 @@
                 let ISO_birthdate = date_birthdate.toISOString();
                 const response = await fetch("register/users", {
                     method: 'POST',
-			        body: JSON.stringify({account_input, password_input, address_input, email_input, ISO_birthdate}),
+			        body: JSON.stringify({account_input, password_input, address_input, email_input, ISO_birthdate, phone_number_input}),
 			        headers: {
 				'content-type': 'application/json'
 			    }

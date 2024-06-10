@@ -2,6 +2,8 @@
     import { current_account } from "../../store";
     import Admin from "./admin/admin.svelte";
     import UserUi from "./users/UserUi.svelte";
+    import { goto } from '$app/navigation';
+    import { browser } from '$app/environment';
 
     import { getModalStore } from '@skeletonlabs/skeleton';
     import type { SvelteComponent } from 'svelte';
@@ -11,6 +13,10 @@
     current_account.subscribe((value) => {
         local_current_account = value;
     })
+
+    if(!local_current_account && browser){
+        goto('/')
+    }
 </script>
 
 <style>
@@ -89,4 +95,5 @@
             <p>You are a guest now! <br>Please turn back to Login page to login first!!</p>
         </div>
     </aside>
+
 {/if}

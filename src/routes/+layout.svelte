@@ -6,9 +6,9 @@
 	//! For popup hover button
 	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
-
+	import { Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import { current_account } from "../store.js";
+	import { current_account, current_account_ID, current_product_page} from "../store.js";
 						
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
@@ -20,6 +20,8 @@
 	function log_out(){
 		$current_account = "";
 		goto ('/login');
+		$current_account_ID = 0;
+		$current_product_page = 1;
 	};
 
 </script>
@@ -35,12 +37,15 @@
 		font-size: 16px;
 	}
 
-	#welcome-message {
+	.user-container {
+		gap: 15px;
+		align-items:center;
+		margin-right: 5px;
+		padding-right: 5px;
 		padding-left: 5px;
-		padding-right: 13vw;
 		font-weight: bold;
 		font-size: 17px;
-		justify-content: center;
+		display: flex;
 	}
 
 	#home-icon {
@@ -88,25 +93,40 @@
 				<TabAnchor href="/login" class="text-center">
 					<svelte:fragment slot="lead"><span>&#10070;</span> Login</svelte:fragment>
 				</TabAnchor>
-			{/if}
 				<TabAnchor href="/register" class="text-center">
 					<svelte:fragment slot="lead"><span>&#9997;</span> Register</svelte:fragment>
 				</TabAnchor>
+			{:else}
+				<TabAnchor href="/product_table" class="text-center">
+					<svelte:fragment slot="lead"><span>🛍️</span> Shopping</svelte:fragment>
+				</TabAnchor>
+				<TabAnchor href="/cart" class="text-center">
+					<svelte:fragment slot="lead"><span>🛒</span> Cart</svelte:fragment>
+				</TabAnchor>
+				<TabAnchor href="/liking_list" class="text-center">
+					<svelte:fragment slot="lead"><span>❤️
+					</span> Likes</svelte:fragment>
+				</TabAnchor>
+				<TabAnchor href="/transaction" class="text-center">
+					<svelte:fragment slot="lead"><span>🤝</span> Transaction</svelte:fragment>
+				</TabAnchor>
+			{/if}
 		</div>
 		
 		{#if local_current_account}
 			<div id="welcome-container" class="flex items-center">
-				<a href="/user_UI">
-					<p id="welcome-message" class="text-center">
-						<span style="color: red;">&#9733;</span> Welcome, {local_current_account}!
-					</p>
-				</a>
+				<TabAnchor href="/user_UI">
+					<div class="user-container">
+							<Avatar background="bg-primary-500" width="w-8">👍</Avatar>
+							{local_current_account}
+					</div>
+				</TabAnchor>
 			</div>
 			<div id="right-container" class="flex space-x-3 items-center justify-end">
 				<div id="light-switch">
 					<LightSwitch />
 				</div>
-				<a href="../login">
+				<a href="/">
 					<button on:click={log_out}
 						id = "Log_out_button"
 						class="btn variant-filled"
@@ -144,11 +164,13 @@
 			<div id="light-switch">
 				<LightSwitch />
 			</div>
-			<button on:click={log_out}
-				id = "Log_out_button"
-				class="btn btn-sm variant-filled"
-				type="button">Log out
-			</button>
+			<a href="/">
+				<button on:click={log_out}
+					id = "Log_out_button"
+					class="btn btn-sm variant-filled"
+					type="button">Log out
+				</button>
+			</a>
 		</div>
 	</TabGroup>
 {/if}
