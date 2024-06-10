@@ -6,6 +6,15 @@
 	import ThSort from '$lib/product_table/ThSort.svelte';
 	import { DataHandler } from '@vincjo/datatables';
 	import DeleteUserMessage from './DeleteUserMessage.svelte';
+	import { current_account } from '../../../../store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+
+	let local_current_account = "";
+	current_account.subscribe((value) => {
+		local_current_account = value;
+	})
 
 	let deleted_user = new Object();
 	let deleting_visible = false;
@@ -21,6 +30,12 @@
     //Init data handler - SERVER
 	const handler = new DataHandler(data, { rowsPerPage: 5 });
 	const rows = handler.getRows();
+
+	if(!local_current_account && browser){
+		onMount(() => {
+			goto('/login');
+		});
+	};
 
 </script>
 
@@ -70,7 +85,6 @@
 			<!-- currently the price and discount attribute is not compatible-->
 			<!-- in the above feature will result in some display error-->
 			{#each $rows as row}
-				{#if row.user_ID !== -1}
 					<tr>
 						<td>{row.user_ID}</td>
 						<td>{row.account}</td>
@@ -86,7 +100,6 @@
 							</button>
 						</td>
 					</tr>
-				{/if}
 			{/each}
 		</tbody>
 	</table>
