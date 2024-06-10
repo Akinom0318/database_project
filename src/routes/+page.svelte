@@ -1,4 +1,6 @@
-<script>
+<script lang="ts">
+    import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
     import { fly } from "svelte/transition";
     import { current_account } from "../store.js";
 
