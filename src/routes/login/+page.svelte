@@ -147,7 +147,7 @@
 		position: fixed; /* blur position */
 		padding-top: 15px;
         margin-top: 35%;
-		backdrop-filter: blur(15px);
+		backdrop-filter: blur(35px);
 	}
 
 </style>

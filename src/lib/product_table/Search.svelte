@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { current_keyword } from '../../store';
-	import type { DataHandler } from '@vincjo/datatables';
 	import { goto } from '$app/navigation';
+	import type { DataHandler } from '@vincjo/datatables';
+	import { current_keyword } from '../../store';
 
 	function reloadPage() {
 		const thisPage = window.location.pathname;
@@ -20,20 +20,19 @@
 
 <span>
 	<input
-	class="input sm:w-64 w-36"
-	type="search"
-	placeholder="Search..."
-	bind:value={value}
-	list="history"
-	on:input={() => {if(value === ""){ handler.search(value)
+		class="input sm:w-64 w-36"
+		type="search"
+		placeholder="Search..."
+		bind:value={value}
+		list="history"
+		on:input={() => {if(value === ""){ handler.search(value)
 						reloadPage();}
-	}}
-	/>
-	<button type="button" class="btn btn-sm variant-filled-secondary" on:click={() => {
+		}}/>
+	<button type="button" class="btn btn-icon ml-4 text-2xl border-slate-500 border-2 bg-slate-300" on:click={() => {
 		handler.search(value)
 		$current_keyword = value
 	}}>
-		Search
+		&#128269;
 	</button>
 </span>
 
