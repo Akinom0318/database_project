@@ -85,7 +85,7 @@
             <div class="grid grid-cols-[auto_1fr] gap-2">
                 <div class="chat-bubble">
                     <a href="https://github.com/Akinom0318">
-                        <Avatar src="src\lib\images\wtf.jpg" width="w-14" />          
+                        <Avatar src="src\lib\images\staff_pics\wtf.jpg" width="w-14" />          
                     </a>
                     <div class="message-content">
                         <div class="card p-2 variant-soft rounded-tl-none space-y-2">
@@ -108,7 +108,7 @@
                     <p>羅傑說你是2486，<span><a href="https://www.youtube.com/@roger1446/videos" style="color: skyblue;">https://www.youtube.com/@roger1446/videos</a></span></p>
             </div>
             <a href="https://github.com/KJC777">
-                <Avatar src="src\lib\images\kjc.jpg" width="w-14" />
+                <Avatar src="src\lib\images\staff_pics\kjc.jpg" width="w-14" />
             </a>
         </div>
         <div class="grid grid-cols-[1fr_auto] gap-2">
@@ -120,7 +120,7 @@
                 <p>放Towa直播台連結:<span><a href="https://www.youtube.com/@TokoyamiTowa/videos" style="color: skyblue;">https://www.youtube.com/@TokoyamiTowa/videos</a></span></p>
             </div>
             <a href="https://github.com/SunGj921028">
-                <Avatar src="src\lib\images\sungj.jpg" width="w-14" />
+                <Avatar src="src\lib\images\staff_pics\sungj.jpg" width="w-14" />
             </a>
         </div>
         <div class="grid grid-cols-[1fr_auto] gap-2">
@@ -142,7 +142,7 @@
                 </b>                
             </div>
             <a href="https://github.com/whatever961">
-                <Avatar src="src\lib\images\notpotato.jpg" width="w-14" />
+                <Avatar src="src\lib\images\staff_pics\notpotato.jpg" width="w-14" />
             </a>
         </div>
     </div>
