@@ -7,7 +7,8 @@
     export let product = Object();
     export let visible = false;
 
-    let each_product_price = product.prices / product.quantity;
+
+    let each_product_price = product.prices;
 
     let local_current_account_ID = 0
 
@@ -51,6 +52,7 @@
         });
         reloadPage();
     }
+
 
 </script>
 

@@ -109,6 +109,9 @@
 				<TabAnchor href="/transaction" class="text-center">
 					<svelte:fragment slot="lead"><span>🤝</span> Transaction</svelte:fragment>
 				</TabAnchor>
+				<TabAnchor href="/currency_exchange" class="text-center">
+					<svelte:fragment slot="lead"><span>🪙</span> Currencies</svelte:fragment>
+				</TabAnchor>
 			{/if}
 		</div>
 		
