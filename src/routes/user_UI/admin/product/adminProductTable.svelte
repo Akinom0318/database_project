@@ -10,6 +10,15 @@
 	import { DataHandler } from '@vincjo/datatables';
 	import { fly } from "svelte/transition";
 	import ConfirmMessage from "./confirmMessage.svelte";
+	import { current_account } from '../../../../store';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+
+	let local_current_account = "";
+	current_account.subscribe((value) => {
+		local_current_account = value;
+	})
 
 	export let data: any[];
     //Init data handler - SERVER
@@ -249,6 +258,12 @@
 		setIDAndCallUpdate(productIDForUpdate);
 		closeUpdateFormProduct();
 	}
+
+	if(!local_current_account && browser){
+		onMount(() => {
+			goto('/login');
+		});
+	};
 
 </script>
 

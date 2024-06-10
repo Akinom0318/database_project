@@ -104,8 +104,7 @@
 					<svelte:fragment slot="lead"><span>🛒</span> Cart</svelte:fragment>
 				</TabAnchor>
 				<TabAnchor href="/liking_list" class="text-center">
-					<svelte:fragment slot="lead"><span>❤️
-					</span> Likes</svelte:fragment>
+					<svelte:fragment slot="lead"><span>❤️</span> Likes</svelte:fragment>
 				</TabAnchor>
 				<TabAnchor href="/transaction" class="text-center">
 					<svelte:fragment slot="lead"><span>🤝</span> Transaction</svelte:fragment>
