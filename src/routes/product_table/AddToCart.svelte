@@ -23,6 +23,7 @@
         visible = false;
     }
 
+
     async function add_to_cart_confirm(){
         visible = false;
         if(slide_value < 1){
@@ -30,7 +31,7 @@
         }
         total_price = slide_value * product.selling_price;
         let product_ID = product.product_ID
-        const response = await fetch("product_table_client/cart_item", {
+        const response = await fetch("product_table/cart_item", {
                 method: 'POST',
                 body: JSON.stringify({local_current_account_ID, product_ID, slide_value, total_price}),
                 headers: {

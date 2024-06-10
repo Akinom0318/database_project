@@ -3,7 +3,6 @@
     import { fly } from "svelte/transition";
     import { current_account_ID, current_account } from '../../../store';
 
-    let email_input = "";
     let bank_account_input = "";
     let address_input = "";
     let bank_number_input = "";
@@ -26,7 +25,6 @@
         const all_users = await get_all_users();
         for(const user of all_users){
             if(user.account === local_current_account){
-                email_input = user.email_address;
                 address_input = user.address;
             }
         }
@@ -97,7 +95,7 @@
                 Order Success✅
             </h1>
         </div>
-        <a href="/">
+        <a href="/cart/order_page/feed_back">
             <div class="alert-actions">
                 <button on:click={order_success_confirm} class="btn variant-filled">
                     OK
@@ -115,17 +113,6 @@
 
 <form>
     <table class ="table-comfortable" >
-        <tr in:fly={{ y: 20 }}>
-            <td ><label id="label-Email" for="Email">Email<span style="color: red;">*</span></label></td>
-            <td><input 
-                bind:value={email_input}
-                class="input"
-                type="email"
-                id = "Email"
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$"
-                placeholder="Enter your Email..."/>
-            </td>
-        </tr>
         <tr in:fly={{ y: 20 }}>
             <td><label id="label-bank_number" for="bank_number">Bank Number<span style="color: red;">*</span></label></td>
             <td><input

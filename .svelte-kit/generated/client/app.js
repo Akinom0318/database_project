@@ -13,24 +13,29 @@ export const nodes = [
 	() => import('./nodes/9'),
 	() => import('./nodes/10'),
 	() => import('./nodes/11'),
-	() => import('./nodes/9'),
-	() => import('./nodes/10'),
-	() => import('./nodes/11')
+	() => import('./nodes/12'),
+	() => import('./nodes/13'),
+	() => import('./nodes/14'),
+	() => import('./nodes/15')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
-		"/": [~2],
+		"/": [2],
 		"/admin": [3],
 		"/cart": [4],
 		"/cart/order_page": [5],
-		"/login": [6],
-		"/register": [7],
-		"/user_UI": [8],
-		"/user_UI/admin/product": [~9],
-		"/user_UI/admin/transaction": [10],
-		"/user_UI/admin/userList": [~11]
+		"/cart/order_page/feed_back": [6],
+		"/liking_list": [7],
+		"/login": [8],
+		"/product_table": [~9],
+		"/register": [10],
+		"/transaction": [11],
+		"/user_UI": [12],
+		"/user_UI/admin/product": [~13],
+		"/user_UI/admin/transaction": [14],
+		"/user_UI/admin/userList": [~15]
 	};
 
 export const hooks = {

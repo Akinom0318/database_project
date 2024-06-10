@@ -3,7 +3,7 @@
 	import '../app.postcss';
 	import { Avatar } from '@skeletonlabs/skeleton';
 	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import { current_account, current_account_ID } from "../store.js";
+	import { current_account, current_account_ID, current_product_page} from "../store.js";
 						
 
 	let local_current_account = "";
@@ -14,6 +14,7 @@
 	function log_out(){
 		$current_account = "";
 		$current_account_ID = 0;
+		$current_product_page = 1;
 	};
 
 </script>
@@ -89,8 +90,18 @@
 					<svelte:fragment slot="lead"><span>&#9997;</span> Register</svelte:fragment>
 				</TabAnchor>
 			{:else}
+				<TabAnchor href="/product_table" class="text-center">
+					<svelte:fragment slot="lead"><span>🛍️</span> Shopping</svelte:fragment>
+				</TabAnchor>
 				<TabAnchor href="/cart" class="text-center">
 					<svelte:fragment slot="lead"><span>🛒</span> Cart</svelte:fragment>
+				</TabAnchor>
+				<TabAnchor href="/liking_list" class="text-center">
+					<svelte:fragment slot="lead"><span>❤️
+					</span> Likes</svelte:fragment>
+				</TabAnchor>
+				<TabAnchor href="/transaction" class="text-center">
+					<svelte:fragment slot="lead"><span>🤝</span> Transaction</svelte:fragment>
 				</TabAnchor>
 			{/if}
 		</div>
@@ -108,7 +119,7 @@
 				<div id="light-switch">
 					<LightSwitch />
 				</div>
-				<a href="../login">
+				<a href="/">
 					<button on:click={log_out}
 						id = "Log_out_button"
 						class="btn variant-filled"
