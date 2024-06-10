@@ -186,19 +186,6 @@
 		}
 		return true;
 	}
-	function containFrontZero(){
-		if(productPrice.toString().charAt(0) == "0"){
-			showModal("Price can't start with 0 !!");
-			return false;
-		}else if(productSales.toString().charAt(0) == "0"){
-			showModal("Sales can't start with 0 !!");
-			return false;
-		}else if(productStocks.toString().charAt(0) == "0"){
-			showModal("Stocks can't start with 0 !!");
-			return false;
-		}
-		return true;
-	}
 	function checkFormat(){
 		if(productPrice < 1 || productPrice > 99999999.99){
 			showModal("Price isn't in the correct range !!");
@@ -220,11 +207,9 @@
 			showModal("Length of product tag isn't in the correct range !!");
 			return false;
 		}
-		if(!containFrontZero()){ return false; }
 		return true;
 	}
 	function checkInsertProductFormat(){
-		// console.log("hello", productName, productTag, productPrice, productDiscount, productSales, productStocks);
 		formType = 0;
 		if(!checkFormat()){return;}
 		if(!containDot(0)){return;}
@@ -244,14 +229,6 @@
 		}
 		if(productLikes < 0 || productLikes > 10000000){
 			showModal("Likes isn't in the correct range !!");
-			return;
-		}
-		if(productSellingPrice.toString().charAt(0) == "0"){
-			showModal("Price can't start with 0 !!");
-			return;
-		}
-		if(productLikes.toString().charAt(0) == "0"){
-			showModal("Price can't start with 0 !!");
 			return;
 		}
 		//! Call update function

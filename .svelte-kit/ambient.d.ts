@@ -27,8 +27,12 @@
  */
 declare module '$env/static/private' {
 	export const DATABASE_URL: string;
+	export const ACSetupSvcPort: string;
+	export const ACSvcPort: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
+	export const ChocolateyInstall: string;
+	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
@@ -36,15 +40,17 @@ declare module '$env/static/private' {
 	export const CommonProgramW6432: string;
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
+	export const CONDA_PROMPT_MODIFIER: string;
 	export const DriverData: string;
 	export const EDITOR: string;
-	export const EFC_6804: string;
+	export const EFC_13732: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
+	export const IGCCSVC_DB: string;
 	export const INIT_CWD: string;
 	export const LANG: string;
 	export const LOCALAPPDATA: string;
@@ -60,9 +66,9 @@ declare module '$env/static/private' {
 	export const npm_config_global_prefix: string;
 	export const npm_config_init_module: string;
 	export const npm_config_local_prefix: string;
+	export const npm_config_metrics_registry: string;
 	export const npm_config_node_gyp: string;
 	export const npm_config_noproxy: string;
-	export const npm_config_npm_version: string;
 	export const npm_config_prefix: string;
 	export const npm_config_userconfig: string;
 	export const npm_config_user_agent: string;
@@ -75,11 +81,22 @@ declare module '$env/static/private' {
 	export const npm_package_version: string;
 	export const NPM_PREFIX_NPM_CLI_JS: string;
 	export const NUMBER_OF_PROCESSORS: string;
+	export const NVIDIAWHITELISTED: string;
 	export const OneDrive: string;
 	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
+	export const POSH_AZURE_ENABLED: string;
+	export const POSH_CURSOR_COLUMN: string;
+	export const POSH_CURSOR_LINE: string;
+	export const POSH_GIT_ENABLED: string;
+	export const POSH_INSTALLER: string;
+	export const POSH_PID: string;
+	export const POSH_SHELL_VERSION: string;
+	export const POSH_THEME: string;
+	export const POSH_THEMES_PATH: string;
+	export const POWERLINE_COMMAND: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
@@ -90,6 +107,9 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
+	export const RlsSvcPort: string;
+	export const SESSIONNAME: string;
+	export const SHIM_MCCOMPAT: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TEMP: string;
@@ -106,10 +126,8 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
-	export const VSCODE_NONCE: string;
 	export const windir: string;
 	export const ZES_ENABLE_SYSMAN: string;
-	export const __PSLockDownPolicy: string;
 }
 
 /**
@@ -142,8 +160,12 @@ declare module '$env/static/public' {
 declare module '$env/dynamic/private' {
 	export const env: {
 		DATABASE_URL: string;
+		ACSetupSvcPort: string;
+		ACSvcPort: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
+		ChocolateyInstall: string;
+		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
 		COLORTERM: string;
@@ -151,15 +173,17 @@ declare module '$env/dynamic/private' {
 		CommonProgramW6432: string;
 		COMPUTERNAME: string;
 		ComSpec: string;
+		CONDA_PROMPT_MODIFIER: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_6804: string;
+		EFC_13732: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
+		IGCCSVC_DB: string;
 		INIT_CWD: string;
 		LANG: string;
 		LOCALAPPDATA: string;
@@ -175,9 +199,9 @@ declare module '$env/dynamic/private' {
 		npm_config_global_prefix: string;
 		npm_config_init_module: string;
 		npm_config_local_prefix: string;
+		npm_config_metrics_registry: string;
 		npm_config_node_gyp: string;
 		npm_config_noproxy: string;
-		npm_config_npm_version: string;
 		npm_config_prefix: string;
 		npm_config_userconfig: string;
 		npm_config_user_agent: string;
@@ -190,11 +214,22 @@ declare module '$env/dynamic/private' {
 		npm_package_version: string;
 		NPM_PREFIX_NPM_CLI_JS: string;
 		NUMBER_OF_PROCESSORS: string;
+		NVIDIAWHITELISTED: string;
 		OneDrive: string;
 		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;
 		PATHEXT: string;
+		POSH_AZURE_ENABLED: string;
+		POSH_CURSOR_COLUMN: string;
+		POSH_CURSOR_LINE: string;
+		POSH_GIT_ENABLED: string;
+		POSH_INSTALLER: string;
+		POSH_PID: string;
+		POSH_SHELL_VERSION: string;
+		POSH_THEME: string;
+		POSH_THEMES_PATH: string;
+		POWERLINE_COMMAND: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;
@@ -205,6 +240,9 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
+		RlsSvcPort: string;
+		SESSIONNAME: string;
+		SHIM_MCCOMPAT: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TEMP: string;
@@ -221,10 +259,8 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_ASKPASS_NODE: string;
 		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
-		VSCODE_NONCE: string;
 		windir: string;
 		ZES_ENABLE_SYSMAN: string;
-		__PSLockDownPolicy: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
