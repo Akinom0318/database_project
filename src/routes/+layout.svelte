@@ -5,10 +5,8 @@
 	import { goto } from '$app/navigation';
 	//! For popup hover button
 	import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
-	import { storePopup } from '@skeletonlabs/skeleton';
-	import { Avatar } from '@skeletonlabs/skeleton';
-	import { LightSwitch } from '@skeletonlabs/skeleton';
-	import { current_account, current_account_ID, current_product_page} from "../store.js";
+	import { Avatar, LightSwitch, storePopup } from '@skeletonlabs/skeleton';
+	import { current_account, current_account_ID, current_product_page } from "../store.js";
 						
 	storePopup.set({ computePosition, autoUpdate, offset, shift, flip, arrow });
 
@@ -19,9 +17,9 @@
 
 	function log_out(){
 		$current_account = "";
-		goto ('/login');
 		$current_account_ID = 0;
 		$current_product_page = 1;
+		goto ('/login');
 	};
 
 </script>
@@ -30,7 +28,12 @@
     :global(body){
         margin: 0;
         padding: 0;
+		/* overflow: auto; */
     }
+
+	/* :global(body::-webkit-scrollbar) {
+    	display: none;
+	} */
 
 	:global(label){
 		font-weight: bold;
@@ -49,7 +52,7 @@
 	}
 
 	#home-icon {
-		font-size: 18px;
+		font-size: 20px;
 	}
 
 	#left-container {
@@ -66,6 +69,14 @@
 		margin-right: 5px;
 		font-weight: bold;
 		cursor: pointer;
+	}
+
+	#welcome-container {
+		padding-right: 18%;
+	}
+
+	#welcome-container-user {
+		padding-right: 10px;
 	}
 
     /* :global(div) {
@@ -114,10 +125,14 @@
 		</div>
 		
 		{#if local_current_account}
-			<div id="welcome-container" class="flex items-center">
+			<div id="welcome-container-user" class="flex items-center">
 				<TabAnchor href="/user_UI">
 					<div class="user-container">
-							<Avatar background="bg-primary-500" width="w-8">👍</Avatar>
+							<Avatar background="bg-cyan" width="w-6">
+								<svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+									<path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+							  	</svg>
+							</Avatar>
 							{local_current_account}
 					</div>
 				</TabAnchor>
@@ -145,13 +160,13 @@
 		class="bg-surface-100-800-token w-full items-center justify-between font-bold">
 		<div id="left-container" class="flex flex-1 space-x-3 items-center justify-start">
 			<TabAnchor href="/user_UI/admin/product" class="text-center">
-				<svelte:fragment slot="lead"><span id="home-icon" style="color: cadetblue">&#9752;</span> product list</svelte:fragment>
+				<svelte:fragment slot="lead"><span id="home-icon" style="color: cadetblue" class="pt-1">&#9752;</span> product list</svelte:fragment>
 			</TabAnchor>
 			<TabAnchor href="/user_UI/admin/userList" class="text-center">
-				<svelte:fragment slot="lead"><span style="color:darkslateblue;">&#9738;</span> user list</svelte:fragment>
+				<svelte:fragment slot="lead"><span style="color:burlywood;" class="text-xl pt-1">&#9823;</span> user list</svelte:fragment>
 			</TabAnchor>
 			<TabAnchor href="/user_UI/admin/transaction" class="text-center">
-				<svelte:fragment slot="lead"><span>&#8471;</span> transaction list</svelte:fragment>
+				<svelte:fragment slot="lead"><span class="text-xl pt-1">&#8471;</span> transaction list</svelte:fragment>
 			</TabAnchor>
 		</div>
 

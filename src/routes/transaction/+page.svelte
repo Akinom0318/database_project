@@ -1,11 +1,11 @@
 <script>
 	//@ts-nocheck
+    import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
+    import { ProgressRadial } from '@skeletonlabs/skeleton';
+    import { onMount } from "svelte";
     import { fly } from "svelte/transition";
     import { current_account_ID } from "../../store";
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
-	import { goto } from '$app/navigation';
-    import { browser } from '$app/environment';
-    import { onMount } from "svelte";
 
 	let loading = false;
     let local_current_account_ID = 0;
@@ -35,8 +35,6 @@
         }
 
 		loading = true;
-        console.log(local_transaction);
-        return all_cart_items_object;
     }
 
     onMount(() => {

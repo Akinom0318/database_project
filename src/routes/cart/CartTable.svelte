@@ -1,12 +1,12 @@
 <script>
 	//@ts-nocheck
+    import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
+    import MessageModal from "$lib/MessageModal.svelte";
+    import { ProgressRadial } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import { current_account_ID } from "../../store";
-	import { ProgressRadial } from '@skeletonlabs/skeleton';
-	import { goto } from '$app/navigation';
-    import { browser } from '$app/environment';
-	import ModifyCart from "./ModifyCart.svelte";
-	import MessageModal from "$lib/MessageModal.svelte";
+    import ModifyCart from "./ModifyCart.svelte";
 
 	let loading = false;
 	let total_price = 0;
@@ -205,7 +205,7 @@
 		<h3 class="h3">
 			Total Price: {total_price}
 		</h3>
-		<button on:click={check_order_valid} type="button" class="btn btn variant-filled-secondary">
+		<button on:click={check_order_valid} type="button" class="btn variant-filled-secondary">
 			Order
 		</button>
 		<h3 class="h3">
