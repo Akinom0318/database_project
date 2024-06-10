@@ -1,4 +1,5 @@
 //@ts-nocheck
+//@ts-nocheck
 
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
@@ -87,6 +88,38 @@ export async function get_certain_user_cart_items(user_ID_input){
   })
 }
 
+export async function get_all_cart_items_db(){
+  return await prisma.cart_item.findMany()
+}
+
+export async function get_all_phone_numbers_db(){
+  return await prisma.user_phone.findMany();
+}
+
+export async function get_certain_product_db(product_ID_input){
+  return await prisma.product.findFirst({
+    where:{
+      product_ID:product_ID_input
+    }
+  })
+}
+
+export async function get_certain_user_cart_items_db(user_ID_input){
+  return await prisma.cart_item.findMany({
+    where:{
+      cart_ID:user_ID_input
+    }
+  })
+}
+
+export async function get_certain_user_keyword(user_ID_input, keyword_input){
+  return await prisma.search_history.findFirst({
+    where:{
+      user_ID:user_ID_input,
+      keyword:keyword_input
+    }
+  })
+}
 
 export async function get_certain_user_keyword(user_ID_input, keyword_input){
   return await prisma.search_history.findFirst({
@@ -234,6 +267,7 @@ export async function create_liking_item_db(user_ID_input, product_ID_input){
 }
 
 
+
 export async function create_new_keyword(user_ID_input,keyword_input){
   await prisma.search_history.create({
     data:{
@@ -273,7 +307,6 @@ export async function update_user_cart_db(user_ID,product_ID_input,quantity_inpu
     }
   })
 }
-
 
 export async function update_product_review_db(product_ID_input,review){
   let current_product = await get_certain_product_db(product_ID_input);
