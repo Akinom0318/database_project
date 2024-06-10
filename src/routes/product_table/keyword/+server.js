@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as database from '$lib/server/server.js';
 import { json } from '@sveltejs/kit';
 
@@ -7,8 +8,7 @@ export async function GET() {
 	return json(all_keyword);
 }
 
-//this is to update a new user
-/** @type {import('./$types').RequestHandler} */
+
 export async function POST(evt) {
     const data = await evt.request.json();
     if((await database.get_certain_user_keyword(data.local_current_account_ID, data.local_keyword)) === null ){
