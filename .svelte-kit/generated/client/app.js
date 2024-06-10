@@ -16,6 +16,7 @@ export const nodes = [
 	() => import('./nodes/12'),
 	() => import('./nodes/13'),
 	() => import('./nodes/14')
+	() => import('./nodes/14')
 ];
 
 export const server_loads = [];
