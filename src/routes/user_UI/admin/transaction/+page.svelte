@@ -4,6 +4,14 @@
     import { onMount } from "svelte";
     import { fly } from "svelte/transition";
     // import { current_account } from "../../../../store";
+    import { current_account } from '../../../../store';
+    import { goto } from '$app/navigation';
+    import { browser } from '$app/environment';
+
+    let local_current_account = "";
+    current_account.subscribe((value) => {
+	local_current_account = value;
+    })
 
     let curOrderIDToShow = -1;
     let detailedVisible = false;
@@ -46,6 +54,12 @@
     onMount(() => {
         getAllTransactionData();
     });
+
+    if(!local_current_account && browser){
+	onMount(() => {
+	    goto('/login');
+	});
+    };
 
 </script>
 
