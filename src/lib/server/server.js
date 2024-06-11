@@ -209,6 +209,7 @@ export async function create_new_paying_db(user_ID_input,bank_account_input,bank
 
 //following content is for place an order, including create order_item and orders
 export async function create_new_order_db(user_ID_input){
+
   await prisma.orders.create({
     data:{
       user_ID:user_ID_input,
@@ -433,6 +434,15 @@ export async function delete_a_user_db(current_user_ID){
   })
 }
 
+export async function delete_user_cart_items_db(user_ID){
+  await prisma.cart_item.deleteMany({
+    where:{
+      cart_ID:user_ID
+    }
+  })
+}
+
+
 export async function delete_a_cart_item_db(user_ID,product_ID_input){
   await prisma.cart_item.delete({
     where:{
@@ -446,10 +456,10 @@ export async function delete_a_cart_item_db(user_ID,product_ID_input){
 
 
 export async function modify_product_after_order_db(user_ID_input){
-  let user_cart_items = get_certain_user_cart_items(user_ID_input);
+  let user_cart_items = await get_certain_user_cart_items(user_ID_input);
 
   for(const item of user_cart_items){
-    let current_product = get_certain_product_db(item.product_ID)
+    let current_product = await get_certain_product_db(item.product_ID)
     await prisma.product.update({
       where:{
         product_ID: current_product.product_ID

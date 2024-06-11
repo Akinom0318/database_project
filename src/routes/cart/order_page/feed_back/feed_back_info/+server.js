@@ -27,7 +27,7 @@ export async function POST(evt) {
         await database.update_product_review_db(item.product_ID,item.score);
     }
 
-    await database.delete_cart_items_db(user_ID);
+    await database.delete_user_cart_items_db(user_ID);
 
 
     return json({ok:true});

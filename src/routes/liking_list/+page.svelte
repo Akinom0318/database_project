@@ -12,7 +12,6 @@
 	let local_current_account_like_item= new Array;
 
     current_account_ID.subscribe((value) => {
-		console.log(value);
         local_current_account_ID = value;
     });
 

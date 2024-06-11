@@ -2,6 +2,9 @@
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import { current_account_ID, current_account } from '../../../store';
+    import { onMount } from "svelte"
+    import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
 
     let bank_account_input = "";
     let address_input = "";
@@ -30,7 +33,9 @@
         }
     }
 
-    check_user_info();
+    onMount(() => {
+        check_user_info();
+    })
 
 
     current_account_ID.subscribe((value) => {
@@ -40,6 +45,10 @@
     current_account.subscribe((value) => {
         local_current_account = value;
     });
+
+    if(!local_current_account_ID && browser){
+        goto('/');
+    }
 
     async function order_placed(){
         const response = await fetch("order_page/paying_info", {
