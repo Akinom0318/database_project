@@ -32,3 +32,12 @@ export async function POST(evt) {
 
     return json({ok:true});
 }
+
+/** @type {import('./$types').RequestHandler} */
+export async function DELETE(evt){
+    const data = await evt.request.json();
+
+    await database.delete_user_cart_items_db(data.local_current_account_ID);
+
+    return json({ok:true});
+}
