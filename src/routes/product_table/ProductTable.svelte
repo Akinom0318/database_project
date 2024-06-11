@@ -25,7 +25,9 @@
 
 	current_keyword.subscribe((value) => {
 		local_keyword = value;
-		add_new_keyword();
+		if(local_keyword != ""){
+			add_new_keyword();
+		}
 	})
 
 	async function add_new_keyword(){

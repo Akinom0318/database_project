@@ -10,12 +10,13 @@
 	import { DataHandler } from '@vincjo/datatables';
 	import { fly } from "svelte/transition";
 	import ConfirmMessage from "./confirmMessage.svelte";
-	import { current_account } from '../../../../store';
+	import { current_account,current_product_page } from '../../../../store';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { browser } from '$app/environment';
 
 	let local_current_account = "";
+	let local_current_product_page = 0;
 	current_account.subscribe((value) => {
 		local_current_account = value;
 	})
@@ -63,7 +64,7 @@
 			"tags": productTag,
 			"original_price": productPrice,
 			"discount": productDiscount,
-			"selling_price": productSellingPrice,
+			"selling_price": productPrice * productDiscount,
 			"sales": productSales,
 			"stock": productStocks,
 			"likes": productLikes,
@@ -187,7 +188,7 @@
 		return true;
 	}
 	function checkFormat(){
-		if(productPrice < 1 || productPrice > 99999999.99){
+		if(productPrice < 0 || productPrice > 99999999.99){
 			showModal("Price isn't in the correct range !!");
 			return false;
 		}else if(productSales < 0 || productSales > 10000000){
@@ -223,7 +224,7 @@
 		if(!checkFormat()){return;}
 		if(!containDot(1)){return;}
 		formUpdateVisable = false;
-		if(productSellingPrice < 1 || productSellingPrice > 99999999.99){
+		if(productSellingPrice < 0 || productSellingPrice > 99999999.99){
 			showModal("Price isn't in the correct range !!");
 			return;
 		}
@@ -242,6 +243,10 @@
 		});
 	};
 
+	current_product_page.subscribe((value) => {
+		local_current_product_page = value;
+		handler.setPage(local_current_product_page);
+	})
 </script>
 
 <style>
