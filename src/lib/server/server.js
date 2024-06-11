@@ -79,14 +79,6 @@ export async function get_certain_product_db(product_ID_input){
   })
 }
 
-export async function get_certain_user_cart_items(user_ID_input){
-  return await prisma.cart_item.findMany({
-    where:{
-      cart_ID:user_ID_input
-    }
-  })
-}
-
 export async function get_all_cart_items_db(){
   return await prisma.cart_item.findMany()
 }
@@ -163,7 +155,7 @@ export async function create_new_user_db(account_input, password_input, address_
 //this includes create paying info and paying two table
 export async function create_new_paying_db(user_ID_input,bank_account_input,bank_num_input, delivering_address_input){
   
-  let current_user_cart = await get_certain_user_cart_items(user_ID_input);
+  let current_user_cart = await get_certain_user_cart_items_db(user_ID_input);
   let total_price_cal = 0;
 
   for(const item of current_user_cart){
@@ -456,7 +448,7 @@ export async function delete_a_cart_item_db(user_ID,product_ID_input){
 
 
 export async function modify_product_after_order_db(user_ID_input){
-  let user_cart_items = await get_certain_user_cart_items(user_ID_input);
+  let user_cart_items = await get_certain_user_cart_items_db(user_ID_input);
 
   for(const item of user_cart_items){
     let current_product = await get_certain_product_db(item.product_ID)
