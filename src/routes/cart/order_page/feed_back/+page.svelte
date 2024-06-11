@@ -5,26 +5,31 @@
     import { ProgressRadial } from '@skeletonlabs/skeleton';
 	import { Ratings } from '@skeletonlabs/skeleton';
 	import { RangeSlider } from '@skeletonlabs/skeleton';
+    import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
+	import { onMount } from "svelte";
 
     let have_cart_item = new Array();
     let message_message = "Please take some time to give feed backs!"
     let message_visable = true;
-    let local_current_account = 0;
+    let local_current_account_ID = 0;
     let loading = false;
 	let gratitude = false;
 
     current_account_ID.subscribe((value) => {
-        local_current_account = value;
+        local_current_account_ID = value;
     })
 
-
+    if(!local_current_account_ID && browser){
+        goto('/')
+    }
     async function get_user_item(){
         const response = await fetch("/cart/order_page/feed_back/feed_back_info")
 
         const cart_items = await response.json();
 
         for(const item of cart_items){
-            if(item.cart_ID === local_current_account)
+            if(item.cart_ID === local_current_account_ID)
             {
                 have_cart_item.push(item);
             }
@@ -47,7 +52,9 @@
 		gratitude = false;
 	}
 
-    get_user_item();
+	onMount(() => {
+		get_user_item();
+	})
 
 </script>
 
