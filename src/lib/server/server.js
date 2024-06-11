@@ -201,7 +201,7 @@ export async function create_new_order_db(user_ID_input){
           order_ID:current_user_order.order_ID,
           product_ID:item.product_ID,
           quantity:item.quantity,
-          prices:item.prices
+          prices:item.prices/item.quantity
       }
     })
   }
