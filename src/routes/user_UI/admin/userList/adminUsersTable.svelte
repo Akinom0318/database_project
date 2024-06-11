@@ -27,9 +27,13 @@
 	}
 
 	export let data: any[];
-    //Init data handler - SERVER
-	const handler = new DataHandler(data, { rowsPerPage: 5 });
+	// filter admin user
+	const filteredData = data.filter(user => user.user_ID !== -1);
+
+	// Init data handler - SERVER
+	const handler = new DataHandler(filteredData, { rowsPerPage: 5 });  // const handler = new DataHandler(data, { rowsPerPage: 5 });
 	const rows = handler.getRows();
+	
 
 	if(!local_current_account && browser){
 		onMount(() => {
