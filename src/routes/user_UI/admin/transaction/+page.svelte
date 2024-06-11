@@ -102,9 +102,9 @@
                                 <div class="text-base">
                                     {#each detail.order_items as detailItem}
                                         <div class="pl-8 pb-1 border-b-2 border-gray-300 pt-1">
-                                            Product id： #<span class="text-purple-700 dark:text-purple-400">{detailItem.product_ID}</span> <br>
                                             Product name： <span class="underline text-red-800 dark:text-red-400">{detailItem.product_name}</span> <br>
-                                            Single product total price： <span class="text-cyan-800 dark:text-cyan-300">{detailItem.prices}</span> <br>
+                                            Product quantity： <span class="text-purple-700 dark:text-purple-400">{detailItem.quantity}</span> <br>
+                                            Single product total price： <span class="text-cyan-800 dark:text-cyan-300">{detailItem.prices * detailItem.quantity}</span> <br>
                                             <!--You get the product price from cart item which is total price (selling price * quantity)-->
                                         </div>
                                     {/each}

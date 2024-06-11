@@ -79,35 +79,10 @@ export async function get_certain_product_db(product_ID_input){
   })
 }
 
-export async function get_all_cart_items_db(){
-  return await prisma.cart_item.findMany()
-}
-
-export async function get_all_phone_numbers_db(){
-  return await prisma.user_phone.findMany();
-}
-
-export async function get_certain_product_db(product_ID_input){
-  return await prisma.product.findFirst({
-    where:{
-      product_ID:product_ID_input
-    }
-  })
-}
-
 export async function get_certain_user_cart_items_db(user_ID_input){
   return await prisma.cart_item.findMany({
     where:{
       cart_ID:user_ID_input
-    }
-  })
-}
-
-export async function get_certain_user_keyword(user_ID_input, keyword_input){
-  return await prisma.search_history.findFirst({
-    where:{
-      user_ID:user_ID_input,
-      keyword:keyword_input
     }
   })
 }
@@ -553,80 +528,5 @@ export async function get_admin_transaction_db() {
   }
   return allTransactionInfo;
 }
-//! Admin traction function
-//! Join From orders, order_item, product, user, paying, paying_info six tables
-// @ts-ignore
-export async function get_admin_transaction_db() {
-  //? First from paying table
-  let allTransactionInfo = await prisma.paying.findMany({
-    orderBy: {
-      order_ID: "asc"
-    }
-  });
-  
-  for (let info of allTransactionInfo) {
-    let curOrderID = info.order_ID;
 
-    //TODO Use order_ID to find in orders table
-    let curOrderInOrdersTable = await prisma.orders.findFirst({
-      where: {
-        order_ID: curOrderID
-      }
-    });
 
-    // If not find in orders table, skip this order
-    if (!curOrderInOrdersTable) {
-      continue;
-    }
-    info.user_ID = curOrderInOrdersTable.user_ID;
-    info.status = curOrderInOrdersTable.status;
-
-    //TODO Use order_ID to find in order_item table
-    let curOrderItem = await prisma.order_item.findMany({
-      where: {
-        order_ID: curOrderID // info.order_ID
-      }
-    });
-    info.order_items = curOrderItem;
-    // Still have to find product name and other info
-    //TODO Use product_ID to find in product table
-    for (let item of curOrderItem) { 
-      let curProductID = item.product_ID;
-      let curProduct = await prisma.product.findFirst({
-        where: {
-          product_ID: curProductID
-        },
-        select: {
-          product_name: true,
-        }
-      });
-      item.product_name = curProduct.product_name;
-    }
-    
-    //TODO Use user_ID to find in user table
-    let curUserID = info.user_ID;
-    let curUserData = await prisma.user.findFirst({
-      where: {
-        user_ID: curUserID
-      },
-      select: {
-        account: true,
-      }
-    });
-    info.user_account = curUserData.account;
-
-    //TODO Use payment_ID to find in paying_info table
-    let curPaymentID = info.payment_ID;
-    let curPaymentData = await prisma.paying_info.findFirst({
-      where: {
-        payment_ID: curPaymentID
-      }
-    });
-    info.bank_account = curPaymentData.bank_account;
-    info.bank_num = curPaymentData.bank_num;
-    info.delivering_address = curPaymentData.delivering_address;
-    info.total_price = curPaymentData.total_price;
-    info.time_slot = curPaymentData.time_slot;
-  }
-  return allTransactionInfo;
-}
