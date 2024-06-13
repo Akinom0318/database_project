@@ -34,10 +34,14 @@
                 have_cart_item.push(item);
             }
         }
-        await fetch("feed_back/feed_back_info",{
-            method: "DELETE",
+        await fetch("feed_back/cart_item_delete",{
+            method: "POST",
             body: JSON.stringify({local_current_account_ID}),
+			headers: {
+				    'content-type': 'application/json'
+            }
         });
+
         loading = true;
     } 
 
