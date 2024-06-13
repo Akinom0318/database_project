@@ -31,8 +31,6 @@ declare module '$env/static/private' {
 	export const ACSvcPort: string;
 	export const ALLUSERSPROFILE: string;
 	export const APPDATA: string;
-	export const ChocolateyInstall: string;
-	export const ChocolateyLastPathUpdate: string;
 	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
 	export const COLORTERM: string;
@@ -104,7 +102,6 @@ declare module '$env/static/private' {
 	export const PROMPT: string;
 	export const PSModulePath: string;
 	export const PUBLIC: string;
-	export const RlsSvcPort: string;
 	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
@@ -124,6 +121,7 @@ declare module '$env/static/private' {
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
 	export const ZES_ENABLE_SYSMAN: string;
+	export const __PSLockDownPolicy: string;
 }
 
 /**
@@ -160,8 +158,6 @@ declare module '$env/dynamic/private' {
 		ACSvcPort: string;
 		ALLUSERSPROFILE: string;
 		APPDATA: string;
-		ChocolateyInstall: string;
-		ChocolateyLastPathUpdate: string;
 		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
 		COLORTERM: string;
@@ -172,7 +168,8 @@ declare module '$env/dynamic/private' {
 		CONDA_PROMPT_MODIFIER: string;
 		DriverData: string;
 		EDITOR: string;
-		EFC_18336: string;
+		FPS_BROWSER_APP_PROFILE_STRING: string;
+		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
@@ -233,7 +230,6 @@ declare module '$env/dynamic/private' {
 		PROMPT: string;
 		PSModulePath: string;
 		PUBLIC: string;
-		RlsSvcPort: string;
 		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
@@ -253,6 +249,7 @@ declare module '$env/dynamic/private' {
 		VSCODE_INJECTION: string;
 		windir: string;
 		ZES_ENABLE_SYSMAN: string;
+		__PSLockDownPolicy: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
