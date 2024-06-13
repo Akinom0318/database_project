@@ -46,7 +46,6 @@
             console.log('Cannot delete admin');
         }
     }
-
 </script>
 
 <style>

@@ -111,9 +111,12 @@
             local_current_account_ID = value;
         })
 
-        const response = await fetch("user_UI/users",{
-            method: "DELETE",
+        const response = await fetch("page/delete_user",{
+            method: "POST",
             body: JSON.stringify({local_current_account_ID}),
+            headers: {
+				    'content-type': 'application/json'
+			    }
         });
 
         $current_account = "";

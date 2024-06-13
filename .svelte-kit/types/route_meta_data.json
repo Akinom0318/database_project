@@ -57,6 +57,9 @@
 		"src/routes/user_UI/admin/userList/+page.server.js",
 		"src/routes/user_UI/admin/userList/+server.js"
 	],
+	"/user_UI/delete_user": [
+		"src/routes/user_UI/delete_user/+server.js"
+	],
 	"/user_UI/users": [
 		"src/routes/user_UI/users/+server.js"
 	]
