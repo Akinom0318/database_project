@@ -6,7 +6,7 @@ import { json } from '@sveltejs/kit';
 export async function POST(evt) {
     const data = await evt.request.json();
     // console.log("Data is below: ");
-    console.log(data);
+    // console.log(data);
     await database.insertUpdateProductDB(data);
 
     return json({ok:true});

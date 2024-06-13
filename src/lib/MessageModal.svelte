@@ -9,7 +9,7 @@
 
     function close() {
         visible = false;
-        console.log("clos", formType);
+        // console.log("clos", formType);
         if(formType == 0){
             formInsertVisable = true;
         }else if(formType == 1){

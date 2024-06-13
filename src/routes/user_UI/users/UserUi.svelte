@@ -1,9 +1,9 @@
 <script lang="ts">
+    import MessageModal from '$lib/MessageModal.svelte';
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import { current_account, current_account_ID } from "../../../store";
     import { isValidEmail } from '../../register/checkFormat';
-    import MessageModal from '$lib/MessageModal.svelte';
     export let user = Object();
 
     let email_input = "";
@@ -42,7 +42,7 @@
         return true;
     }
      async function check_valid(){
-        console.log("Checking Validity...");
+        // console.log("Checking Validity...");
         //! Check if input contains whitespace
         if(!containsWhiteSpace()) { return;}
         if(!email_input){ return; }
@@ -141,7 +141,7 @@
 				    'content-type': 'application/json'
 			    }
 		    });
-        console.log("modify success!");
+        // console.log("modify success!");
         modify_success = true;
     }
 

@@ -107,7 +107,7 @@
     //check whether the input is valid
     //if valid then will register
     async function check_valid(){
-        console.log("Checking Validity...");
+        // console.log("Checking Validity...");
         //! Check if input contains whitespace
         if(!containsWhiteSpace()) { return;}
         if(!email_input){ return; }
@@ -135,13 +135,12 @@
 
         if(!phone_number_input){ return; }
         const phone_number_format_check = isValidPhoneNumber(phone_number_input);
-        if(!phone_number_format_check){ console.log("Phone number format is invalid."); showModal("Format of Phone Number is invalid!"); return; }
-        
+        if(!phone_number_format_check){ showModal("Format of Phone Number is invalid!"); return; }
         if(!birthdate_input){ return; }
 
         input_valid = true;
         if(input_valid){
-            console.log("Input is valid!");
+            // console.log("Input is valid!");
             //check_result contain the result of check_account_existence
             let check_result = await check_account_existence()
             if(!check_result){
@@ -154,7 +153,7 @@
 				'content-type': 'application/json'
 			    }
 		    });
-                console.log("Register Success!");
+                // console.log("Register Success!");
                 register_success = true;
             }
         }
@@ -326,6 +325,8 @@
                 class="input"
                 type="date"
                 id = "Birth_Date"
+                min="1904-01-01"
+                max="2024-06-12"
                 placeholder="Enter your birth date..." required/>
             </td>
         </tr>

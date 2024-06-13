@@ -18,11 +18,11 @@ export async function POST(evt){
 
 
     if(await database.get_certain_liking_db(user_ID,product_ID)){
-        console.log("delete liking");
+        // console.log("delete liking");
         await database.delete_liking_item_db(user_ID,product_ID);
         await database.update_product_liking_db(product_ID, -1);
     }else{
-        console.log("create liking");
+        // console.log("create liking");
         await database.create_liking_item_db(user_ID,product_ID);
         await database.update_product_liking_db(product_ID, 1);
     }
