@@ -44,6 +44,7 @@
 	"/transaction/user_transaction": [
 		"src/routes/transaction/user_transaction/+server.js"
 	],
+	"/transition_page": [],
 	"/user_UI": [],
 	"/user_UI/admin/product": [
 		"src/routes/user_UI/admin/product/+page.server.js",

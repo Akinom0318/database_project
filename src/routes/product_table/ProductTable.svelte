@@ -69,7 +69,7 @@
 	function reloadPage() {
         const thisPage = window.location.pathname;
 
-        goto('/').then(
+        goto('/transition_page').then(
 			() => goto(thisPage)
         );
     }

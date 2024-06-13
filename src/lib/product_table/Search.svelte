@@ -8,7 +8,7 @@
 
 		console.log('goto ' + thisPage);
 
-		goto('/').then(
+		goto('/transition_page').then(
 			() => goto(thisPage)
 		);
 	}
