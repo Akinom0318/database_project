@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
     import { SlideToggle } from '@skeletonlabs/skeleton';
     import { fly } from "svelte/transition";
     import { current_account_ID, current_account } from '../../../store';
     import { onMount } from "svelte"
     import { browser } from '$app/environment';
     import { goto } from '$app/navigation';
+    import MessageModal from '$lib/MessageModal.svelte';
 
     let bank_account_input = "";
     let address_input = "";
@@ -15,6 +16,32 @@
     let order_success = false;
     let mask_bank_account = false;
 
+
+    let modalMessage = '';
+    let modalVisible = false;
+    function showModal(message: string) {
+        modalMessage = message;
+        modalVisible = true;
+    }
+
+    function containsWhiteSpace() {
+        const whiteSpaceAccount = bank_account_input.includes(" ");
+        if(whiteSpaceAccount) {
+            showModal("Bank account cannot contain whitespace.");
+            return false;
+        }
+        const whiteSpacePassword = bank_number_input.includes(" ");
+        if(whiteSpacePassword) {
+            showModal("Bank number cannot contain whitespace.");
+            return false;
+        }
+        const whiteSpaceAddress = address_input.includes(" ");
+        if(whiteSpaceAddress) {
+            showModal("Address cannot contain whitespace.");
+            return false;
+        }
+        return true;
+    }
 
     //return all users
     async function get_all_users(){
@@ -51,6 +78,21 @@
     }
 
     async function order_placed(){
+        console.log("Checking Validity...");
+        //! Check if input contains whitespace
+        if(!containsWhiteSpace()) { return;}
+        if(!address_input){ return; }
+        if(!bank_number_input){ return; }
+        if(!bank_account_input){ return; }
+        else if(bank_number_input.length != 3) { 
+            showModal("Bank number should be 3 digits.");
+            return;
+        }
+        else if(bank_account_input.length != 16){
+            showModal("Bank account should be 16 digits");
+            return;
+        }
+
         const response = await fetch("order_page/paying_info", {
                 method: 'POST',
                 body: JSON.stringify({local_current_account_ID, bank_account_input, bank_number_input, address_input}),
@@ -97,6 +139,9 @@
     
 </style>
 
+<MessageModal bind:visible={modalVisible} bind:message={modalMessage} />
+
+
 {#if order_success}
     <aside class="alert variant-ghost-success" in:fly={{ y: 20 }}>
         <div class="alert-message">
@@ -129,6 +174,8 @@
                 class="input"
                 type="text"
                 id = "bank_number"
+                minlength="3"
+                maxlength="3"
                 placeholder="Enter bank number..."/>
             </td>
         </tr>
@@ -140,6 +187,8 @@
                     bind:value={bank_account_input}
                     class="input"
                     type = "text"
+                    minlength="16"
+                    maxlength="16"
                     id = "Password"
                     placeholder="Enter your bank account..."/>
                 {:else}
@@ -148,6 +197,8 @@
                         class="input"
                         type = "password"
                         id = "Password"
+                        minlength="16"
+                        maxlength="16"
                         placeholder="Enter your bank account..."/>
                 {/if}
             </td>
