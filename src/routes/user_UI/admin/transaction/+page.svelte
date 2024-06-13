@@ -3,10 +3,10 @@
     import { Avatar, ProgressRadial } from '@skeletonlabs/skeleton';
     import { onMount } from "svelte";
     import { fly } from "svelte/transition";
-    // import { current_account } from "../../../../store";
-    import { current_account } from '../../../../store';
-    import { goto } from '$app/navigation';
+// import { current_account } from "../../../../store";
     import { browser } from '$app/environment';
+    import { goto } from '$app/navigation';
+    import { current_account } from '../../../../store';
 
     let local_current_account = "";
     current_account.subscribe((value) => {
@@ -104,7 +104,10 @@
                                 Total Prices： <span class="text-cyan-800 dark:text-cyan-300">{detail.total_price}</span>
                             </div>
                             <div class="border-b-2 border-gray-300 pt-1 pb-2">
-                                Bank Account： <span class="text-yellow-800 dark:text-yellow-200">{detail.bank_num}</span>
+                                Bank Number： <span class="text-yellow-800 dark:text-yellow-200">{detail.bank_num}</span>
+                            </div>
+                            <div class="border-b-2 border-gray-300 pt-1 pb-2">
+                                Bank Account： <span class="text-yellow-800 dark:text-yellow-200">{detail.bank_account}</span>
                             </div>
                             <div class="border-b-2 border-gray-300 pt-1 pb-2">
                                 Delivering Address： <span class="text-green-800 dark:text-green-200">{detail.delivering_address}</span>
