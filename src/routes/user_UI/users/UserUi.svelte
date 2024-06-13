@@ -4,6 +4,7 @@
     import { current_account, current_account_ID } from "../../../store";
     import { isValidEmail } from '../../register/checkFormat';
     import MessageModal from '$lib/MessageModal.svelte';
+    export let user = Object();
 
     let email_input = "";
     let password_input = "";
@@ -106,17 +107,18 @@
     async function delete_confirm_yes(){
         delete_warning = false;
         let local_current_account_ID = 0;
+        let user_ID = user.user_ID
 
         current_account_ID.subscribe((value) => {
             local_current_account_ID = value;
         })
 
-        const response = await fetch("page/delete_user",{
+        const response = await fetch("user_UI/users/userDelete",{
             method: "POST",
             body: JSON.stringify({local_current_account_ID}),
             headers: {
 				    'content-type': 'application/json'
-			    }
+            }
         });
 
         $current_account = "";
