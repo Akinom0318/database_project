@@ -7,6 +7,9 @@
 	],
 	"/cart/order_page": [],
 	"/cart/order_page/feed_back": [],
+	"/cart/order_page/feed_back/cart_item_delete": [
+		"src/routes/cart/order_page/feed_back/cart_item_delete/+server.js"
+	],
 	"/cart/order_page/feed_back/feed_back_info": [
 		"src/routes/cart/order_page/feed_back/feed_back_info/+server.js"
 	],
