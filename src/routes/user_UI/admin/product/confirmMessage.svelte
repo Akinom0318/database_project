@@ -30,11 +30,13 @@
 
     function reloadPage() {
 		let thisPage = window.location.pathname;
-        goto('/').then(
-            () => goto(thisPage)
-        );
-    }
+		console.log('goto ' + thisPage);
 
+		goto('/transition_page').then(
+			() => goto(thisPage)
+		);
+    }
+    
     //! delete product function
 	async function deleteProduct(product_ID : number) {
 		const response = await fetch("product", {

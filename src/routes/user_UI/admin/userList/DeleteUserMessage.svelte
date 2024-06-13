@@ -17,13 +17,12 @@
     }
 
     function reloadPage() {
-        const thisPage = window.location.pathname;
+		let thisPage = window.location.pathname;
+		console.log('goto ' + thisPage);
 
-        console.log('goto ' + thisPage);
-
-        goto('/').then(
-            () => goto(thisPage)
-        );
+		goto('/transition_page').then(
+			() => goto(thisPage)
+		);
     }
 
     async function delete_user_confirm(){
