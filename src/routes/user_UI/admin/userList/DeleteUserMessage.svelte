@@ -1,10 +1,11 @@
 <script>
-    import { fly } from "svelte/transition";
+    import { goto } from '$app/navigation';
     import { RangeSlider } from '@skeletonlabs/skeleton';
+    import { fly } from "svelte/transition";
     import { current_account_ID } from "../../../../store";
+
     export let user = Object();
     export let visible = false;
-    import { goto } from '$app/navigation';
 
     let local_current_account_ID = 0
 
@@ -18,7 +19,7 @@
 
     function reloadPage() {
 		let thisPage = window.location.pathname;
-		console.log('goto ' + thisPage);
+		// console.log('goto ' + thisPage);
 
 		goto('/transition_page').then(
 			() => goto(thisPage)

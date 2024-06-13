@@ -1,15 +1,15 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import Pagination from '$lib/product_table/Pagination.svelte';
 	import RowCount from '$lib/product_table/RowCount.svelte';
 	import RowsPerPage from '$lib/product_table/RowsPerPage.svelte';
 	import Search from '$lib/product_table/Search.svelte';
 	import ThSort from '$lib/product_table/ThSort.svelte';
 	import { DataHandler } from '@vincjo/datatables';
-	import DeleteUserMessage from './DeleteUserMessage.svelte';
-	import { current_account } from '../../../../store';
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
+	import { current_account } from '../../../../store';
+	import DeleteUserMessage from './DeleteUserMessage.svelte';
 
 	let local_current_account = "";
 	current_account.subscribe((value) => {
@@ -23,7 +23,7 @@
 	function delete_user(user){
 		deleted_user = user;
 		deleting_visible = true;
-		console.log(deleted_user);
+		// console.log(deleted_user);
 	}
 
 	export let data: any[];

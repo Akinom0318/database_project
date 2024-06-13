@@ -6,7 +6,7 @@
 	function reloadPage() {
 		const thisPage = window.location.pathname;
 
-		console.log('goto ' + thisPage);
+		// console.log('goto ' + thisPage);
 
 		goto('/transition_page').then(
 			() => goto(thisPage)
