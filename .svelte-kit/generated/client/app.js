@@ -18,7 +18,8 @@ export const nodes = [
 	() => import('./nodes/14'),
 	() => import('./nodes/15'),
 	() => import('./nodes/16'),
-	() => import('./nodes/17')
+	() => import('./nodes/17'),
+	() => import('./nodes/18')
 ];
 
 export const server_loads = [];
@@ -36,10 +37,11 @@ export const dictionary = {
 		"/product_table": [~11],
 		"/register": [12],
 		"/transaction": [13],
-		"/user_UI": [14],
-		"/user_UI/admin/product": [~15],
-		"/user_UI/admin/transaction": [16],
-		"/user_UI/admin/userList": [~17]
+		"/transition_page": [14],
+		"/user_UI": [15],
+		"/user_UI/admin/product": [~16],
+		"/user_UI/admin/transaction": [17],
+		"/user_UI/admin/userList": [~18]
 	};
 
 export const hooks = {
