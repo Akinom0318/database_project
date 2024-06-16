@@ -1,3 +1,35 @@
+# Team5 Database Project
+This is a project using svelteKit, TailwindCSS, some UI methods, MySQL, prisma.
+
+## Team Member
+1. Akinom
+2. SunGj
+3. KJC
+4. Notpotato
+
+## How to use
+1. Just clone this repo to your local repo using
+```bash
+git clone https://github.com/Akinom0318/database_project.git
+```
+2. Install the modules we need for the project
+```bash
+npm install
+# Or
+npm i
+```
+3. Please watch .env.example to see the environment setting.
+4. The first five variable are for the docker to set your DB environment, and the last one is for prisma to connect to your DB.
+5. So, add a ```bash .env``` file on the root folder, add those six lines in .env.example into it.
+6. Once you make your own .env file done
+```bach
+docker-compose up --build -d
+```
+7. Then you can open the website by
+```bash
+npm run dev
+```
+
 # create-svelte
 
 Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
