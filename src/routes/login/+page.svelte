@@ -217,7 +217,7 @@
                     type="text"
                     id = "Account"
                     minlength="1"
-                    maxlength="50"
+                    maxlength="30"
                     placeholder="Enter your account..." required/>
                 </td>
             </tr>
@@ -231,7 +231,7 @@
                             type = "text"
                             id = "Password"
                             minlength="4"
-                            maxlength="55"
+                            maxlength="20"
                             placeholder="Enter your Password..." required/>
                     {:else}
                         <input
@@ -240,7 +240,7 @@
                             type = "password"
                             id = "Password"
                             minlength="4"
-                            maxlength="55"
+                            maxlength="20"
                             placeholder="Enter your Password..." required/>
                     {/if}
                 </td>

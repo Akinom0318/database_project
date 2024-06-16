@@ -55,8 +55,8 @@
 
 
         if(!password_input){ return; }
-        else if(password_input.length < 4 || password_input.length > 55) { 
-            showModal("Password length needs to between 4 and 55 characters.");
+        else if(password_input.length < 4 || password_input.length > 20) { 
+            showModal("Password length needs to between 4 and 20 characters.");
             return;
         }
 
@@ -247,9 +247,8 @@
             <td><input 
                 bind:value={email_input}
                 class="input"
-                type="email"
+                type="text"
                 id = "Email"
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$"
                 placeholder="Enter your Email..."/>
             </td>
         </tr>
@@ -262,7 +261,7 @@
                     class="input"
                     type = "text"
                     minlength="4"
-                    maxlength="55"
+                    maxlength="20"
                     id = "Password"
                     placeholder="Enter your Password..."/>
                 {:else}
@@ -272,7 +271,7 @@
                         type = "password"
                         id = "Password"
                         minlength="4"
-                        maxlength="55"
+                        maxlength="20"
                         placeholder="Enter your Password..."/>
                 {/if}
             </td>

@@ -125,7 +125,7 @@
         }
 
         if(!password_input){ return; }
-        else if(password_input.length < 4 || password_input.length > 35) { 
+        else if(password_input.length < 4 || password_input.length > 20) { 
             showModal("Password length needs to between 4 and 55 characters.");
             return;
         }
@@ -265,7 +265,7 @@
                 type="text"
                 id = "Account"
                 minlength="1"
-                maxlength="50"
+                maxlength="30"
                 placeholder="Enter your account..." required/>
             </td>
         </tr>
@@ -278,7 +278,7 @@
                     class="input"
                     type = "text"
                     minlength="4"
-                    maxlength="55"
+                    maxlength="20"
                     id = "Password"
                     placeholder="Enter your Password..." required/>
                 {:else}
@@ -288,7 +288,7 @@
                         type = "password"
                         id = "Password"
                         minlength="4"
-                        maxlength="55"
+                        maxlength="20"
                         placeholder="Enter your Password..." required/>
                 {/if}
             </td>
