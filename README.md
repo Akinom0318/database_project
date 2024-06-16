@@ -8,6 +8,7 @@ This is a project using svelteKit, TailwindCSS, some UI methods, MySQL, prisma.
 4. Notpotato
 
 ## How to use
+請準備好nodejs, npm, docker, docker-compose
 1. Just clone this repo to your local repo using
 ```bash
 git clone https://github.com/Akinom0318/database_project.git
