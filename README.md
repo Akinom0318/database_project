@@ -19,8 +19,8 @@ npm install
 npm i
 ```
 3. Please watch .env.example to see the environment setting.
-4. The first five variable are for the docker to set your DB environment, and the last one is for prisma to connect to your DB.
-5. So, add a ```bash .env``` file on the root folder, add those six lines in .env.example into it.
+4. The first five variables are for the docker to set up your DB environment, and the last one is for prisma to connect to your DB.
+5. So, add a ```.env``` file on the root folder, add those six lines in .env.example into it.
 6. Once you make your own .env file done
 ```bach
 docker-compose up --build -d
