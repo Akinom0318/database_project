@@ -9,4 +9,4 @@ export async function POST(evt){
     await database.delete_a_user_db(data.local_current_account_ID);
 
     return json({ok:true});
-}v
+}
