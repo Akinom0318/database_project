@@ -23,12 +23,14 @@
 		local_current_account_ID = value;
 	})
 
-	current_keyword.subscribe((value) => {
-		local_keyword = value;
-		if(local_keyword != ""){
-			add_new_keyword();
-		}
-	})
+	if(local_current_account_ID != -1){
+			current_keyword.subscribe((value) => {
+			local_keyword = value;
+			if(local_keyword != ""){
+				add_new_keyword();
+			}
+		})
+	}
 
 	async function add_new_keyword(){
 		const response = await fetch("product_table/keyword",{
