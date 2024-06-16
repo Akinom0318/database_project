@@ -298,6 +298,8 @@
                 class="input"
                 type="date"
                 id = "Birth_Date"
+                min="1904-01-01"
+                max="2024-06-12"
                 placeholder="Enter your birth date..."/>
             </td>
         </tr>
