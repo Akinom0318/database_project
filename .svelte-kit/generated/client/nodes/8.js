@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/currency_tmp_liking_lst/+page.svelte";
