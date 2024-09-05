@@ -11,7 +11,7 @@
 
 ## Team Member
 1. Akinom
-2. SunGj
+2. [SunGj](https://github.com/SunGj921028)
 3. KJC
 4. Notpotato
 
