@@ -1,5 +1,13 @@
 # Team5 Database Project
-This is a project using svelteKit, TailwindCSS, some UI methods, MySQL, prisma.
+- This is a project that simulates a web of shopping website like 原價屋.
+
+## Tech we use
+- svelteKit
+- TailwindCSS(flowbite, skeleton)
+- Javascript, Typescript, node.js, npm package
+- MySQL for backend
+- prisma
+- docker(compose)
 
 ## Team Member
 1. Akinom
