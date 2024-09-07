@@ -16,7 +16,7 @@
 4. Notpotato
 
 ## How to use
-請準備好nodejs, npm, docker, docker-compose
+#### Please prepare a environment already with nodejs, npm, docker, docker-compose.
 1. Just clone this repo to your local repo using
 ```bash
 git clone https://github.com/Akinom0318/database_project.git
