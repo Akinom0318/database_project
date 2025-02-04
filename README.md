@@ -1,4 +1,4 @@
-# Team5 Database Project
+# Database Project
 - This is a project that simulates a web of shopping website like 原價屋.
 
 ## Tech we use
